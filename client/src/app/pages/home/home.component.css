@@ -1,3 +1,9 @@
+body {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+}
+
 .main-img {
     position: absolute;
     top: 15%;
