@@ -1,6 +1,11 @@
 nav {
     margin-bottom: 8%;
     padding: 3% 2%;
+    font-family: "Manrope", sans-serif;
+}
+
+li {
+    margin: auto 5%;
 }
 
 .logo {
