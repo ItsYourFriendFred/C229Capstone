@@ -1,0 +1,37 @@
+/*!
+Routes handling requests related to surveys access and processing
+*/
+
+import express from 'express';
+const router = express.Router();
+
+// import { AuthGuard, EditGuard } from '../Util';  // Replaced by protecting entire route with JWT
+
+import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage } from '../controllers/surveys'
+
+// Surveys Page GET request
+router.get('/surveys', DisplaySurveys);
+// Temp remove Authguard for api conversion ^v
+
+// Add Page GET request
+// router.get('/add', AuthGuard, DisplayAddPage);
+router.get('/surveys/add', DisplayAddPage);
+
+// Edit Page Get request
+// router.get('/edit/', AuthGuard, EditGuard);
+// router.get('/edit/:id', AuthGuard, DisplayEditPage);
+router.get('/surveys/edit/:id', DisplayEditPage);
+
+// Process Add Page POST request
+//router.post('/add', AuthGuard, ProcessAddPage);
+router.post('/surveys/add', ProcessAddPage);
+
+// Process Edit Page POST request
+// router.post('/edit/:id', AuthGuard, ProcessEditPage);
+router.post('/surveys/edit/:id', ProcessEditPage);
+
+// Process Delete Page GET request
+// router.get('/delete/:id', AuthGuard, ProcessDeletePage);
+router.get('/surveys/delete/:id', ProcessDeletePage);
+
+export default router;
