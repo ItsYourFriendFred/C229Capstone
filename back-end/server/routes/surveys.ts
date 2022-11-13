@@ -9,28 +9,28 @@ const router = express.Router();
 
 import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage } from '../controllers/surveys'
 
-// Display Business Contacts Page
+// Surveys Page GET request
 router.get('/surveys', DisplaySurveys);
 // Temp remove Authguard for api conversion ^v
 
-// Display Add Page
+// Add Page GET request
 // router.get('/add', AuthGuard, DisplayAddPage);
 router.get('/surveys/add', DisplayAddPage);
 
-// Display Edit Page
+// Edit Page Get request
 // router.get('/edit/', AuthGuard, EditGuard);
 // router.get('/edit/:id', AuthGuard, DisplayEditPage);
 router.get('/surveys/edit/:id', DisplayEditPage);
 
-// Process Add Page
+// Process Add Page POST request
 //router.post('/add', AuthGuard, ProcessAddPage);
 router.post('/surveys/add', ProcessAddPage);
 
-// Process Edit Page
+// Process Edit Page POST request
 // router.post('/edit/:id', AuthGuard, ProcessEditPage);
 router.post('/surveys/edit/:id', ProcessEditPage);
 
-// Process Delete Page
+// Process Delete Page GET request
 // router.get('/delete/:id', AuthGuard, ProcessDeletePage);
 router.get('/surveys/delete/:id', ProcessDeletePage);
 
