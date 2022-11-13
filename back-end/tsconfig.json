@@ -18,5 +18,5 @@
         "experimentalDecorators": true,
         "moduleResolution": "Node",
     },
-    "exclude": ["node_modules", "client"]
+    "exclude": ["node_modules"]
 }
