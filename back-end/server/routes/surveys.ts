@@ -9,9 +9,10 @@ const router = express.Router();
 
 import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage } from '../controllers/surveys'
 
-// Surveys Page GET request
-router.get('/surveys', DisplaySurveys);
+// Surveys Page GET request 
 // Temp remove Authguard for api conversion ^v
+router.get('/surveys', DisplaySurveys);
+
 
 // Add Page GET request
 // router.get('/add', AuthGuard, DisplayAddPage);

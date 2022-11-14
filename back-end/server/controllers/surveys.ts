@@ -53,7 +53,7 @@ export function ProcessAddPage(req: express.Request, res: express.Response, next
         }
     );
     newSurvey.isActive = true;
-    // Insert the new Contact object into the database (contacts collection)
+    // Insert the new Survey object into the database (surveys collection)
     Survey.create(newSurvey, function (err: CallbackError) {
         if (err) {
             console.error(err);
