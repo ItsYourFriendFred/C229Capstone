@@ -1,19 +1,19 @@
 nav {
-    margin-bottom: 8%;
-    padding: 3% 2%;
-    font-family: "Manrope", sans-serif;
+  margin-bottom: 8%;
+  padding: 3% 0;
+  font-family: "Manrope", sans-serif;
 }
 
 li {
-    margin: auto 5%;
+  margin: auto 5%;
 }
 
 .logo {
-    color: #F4A261;
-    font-family: 'blanka';
+  color: #f4a261;
+  font-family: "blanka";
 }
 
 .login-option {
-    color: #F4A261;
-    font-weight: 600;
+  color: #f4a261;
+  font-weight: 600;
 }

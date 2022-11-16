@@ -19,7 +19,7 @@ import { UserModule } from './user/user.module';
     PagesModule,
     PartialsModule,
     SurveyModule,
-    UserModule
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

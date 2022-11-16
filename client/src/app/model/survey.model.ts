@@ -1,10 +1,11 @@
 export class Survey {
   constructor(
+    public dateStart: Date,
+    public dateEnd: Date,
     public _id?: number,
     public title?: string,
     public author?: string,
-    public dateStart?: Date,
-    public dateEnd?: Date,
+    public user?: string,
     public questionsBloc?: {
       question?: string,
       options?: string[]
