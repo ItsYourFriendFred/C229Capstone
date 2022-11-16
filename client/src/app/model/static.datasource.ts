@@ -10,6 +10,7 @@ export class StaticDataSource {
       new Date('2022-12-23'),
       1,
       'Why do people love React',
+      'Technology',
       'Benjamin Lefebvre',
       'Bengee',
       [
@@ -29,6 +30,7 @@ export class StaticDataSource {
       new Date('2020-01-23'),
       2,
       'Habits of Canadians',
+      'Lifestyle',
       'Mathis Boogie',
       'Math',
       [
@@ -48,6 +50,7 @@ export class StaticDataSource {
       new Date('2018-01-23'),
       3,
       'What is the most popular...',
+      'Lifestyle',
       'Bob Desjardins',
       'bobby',
       [
@@ -66,8 +69,9 @@ export class StaticDataSource {
       new Date('2018-01-12'),
       new Date('2018-01-23'),
       4,
-      'huefhwbfil gregjkwnl a',
-      'Haaaaaaaaaa',
+      'huefhwbfil gregjkwnl',
+      'hgwiufhwi',
+      'Haaaaaaaa',
       'bdjwbef',
       [
         {

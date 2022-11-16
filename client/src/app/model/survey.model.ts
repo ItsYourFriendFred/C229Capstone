@@ -4,6 +4,7 @@ export class Survey {
     public dateEnd: Date,
     public _id?: number,
     public title?: string,
+    public type?: string,
     public author?: string,
     public user?: string,
     public questionsBloc?: {

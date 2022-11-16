@@ -1,0 +1,28 @@
+h5 {
+    color: #264653;
+}
+.list-header {
+  padding: 1% 5% 0.25%;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  opacity: 80%;
+  
+}
+
+.list-name {
+  display: inline;
+  width: 20%;
+  margin-right: 5%;
+}
+
+.list-type {
+  display: inline;
+  width: 20%;
+   margin-right: 5%;
+}
+
+.list-status {
+  display: inline;
+  width: 20%;
+   margin-right: 5%;
+}
