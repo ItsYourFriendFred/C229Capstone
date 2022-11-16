@@ -17,7 +17,6 @@ p {
 
 .backdrop {
   padding: 0 25% 5%;
-  background-color: #d9d9d9;
+  background-color: #BEC8CC;
   border-radius: 20px;
-  opacity: 80%;
 }

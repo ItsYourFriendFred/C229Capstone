@@ -27,3 +27,40 @@ p {
 img {
   z-index: -1;
 }
+
+.btn {
+    color:#264653;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #2A9D8F;
+    border-color: #2A9D8F;
+}
+
+.btn-warning {
+   background-color: #E9C46A;
+    border-color: #E9C46A;
+}
+
+.btn-danger {
+ background-color: #E76F51;
+    border-color: #E76F51;
+    
+}
+
+.btn-primary:hover {
+    background-color: #264653;
+    border-color: #264653;
+}
+
+.btn-warning:hover {
+   background-color: #F4A261;
+    border-color: #F4A261;
+    color: #fff;
+}
+
+.btn-danger:hover {
+ background-color: #F4A261;
+    border-color: #F4A261;
+}
