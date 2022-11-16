@@ -1,7 +1,7 @@
 export class Survey {
   constructor(
-    public dateStart: Date,
-    public dateEnd: Date,
+    public dateStart?: Date,
+    public dateEnd?: Date,
     public _id?: number,
     public title?: string,
     public type?: string,
@@ -13,7 +13,8 @@ export class Survey {
     }[],
     public answerBloc?: {
       answer?: number[];
-    }[]
+    }[],
+    public isActive?: boolean
   ) {}
 }
 
