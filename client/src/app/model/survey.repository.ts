@@ -3,7 +3,7 @@ import { Survey } from './survey.model';
 import { StaticDataSource } from './static.datasource';
 
 @Injectable()
-export class ArticleRepository {
+export class SurveyRepository {
   private surveys: Survey[] = [];
 //   private completedSurveys: Survey[];
 //   private availableSurveys: Survey[];
