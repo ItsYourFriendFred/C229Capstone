@@ -1,6 +1,29 @@
 <div class="container">
-    <h1>
-      Survey List
-    </h1>
+  <h1>Survey List</h1>
+  <div class="row">
+    <div class="col-8"><input type="text" /></div>
+    <div class="col-4"><button>New Survey</button></div>
   </div>
-  
+  <div class="list-header d-flex flex-row">
+    <div class="list-name">
+      <h5>Name</h5>
+    </div>
+    <div class="list-type">
+      <h5>Survey Type</h5>
+    </div>
+    <div class="list-status">
+      <h5>Status</h5>
+    </div>
+  </div>
+  <div *ngFor="let survey of surveys" class="list-header mt-3 d-flex flex-row">
+    <div class="list-name">
+      <h5>{{ survey.title }}</h5>
+    </div>
+    <div class="list-type">
+      <h5>{{ survey.type }}</h5>
+    </div>
+    <div class="list-status">
+      <h5>{{ survey.status }}</h5>
+    </div>
+  </div>
+</div>

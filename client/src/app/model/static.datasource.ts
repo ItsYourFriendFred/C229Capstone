@@ -6,70 +6,85 @@ import { Observable, from } from 'rxjs';
 export class StaticDataSource {
   private surveys: Survey[] = [
     new Survey(
+      new Date('2022-12-12'),
+      new Date('2022-12-23'),
       1,
       'Why do people love React',
+      'Technology',
       'Benjamin Lefebvre',
-      new Date(),
-      new Date(),
-      [{
-        question: 'Why...?',
-        options: ["Option 1", "Option 2", "Option 3"]
-      },
+      'Bengee',
+      [
         {
-        question: 'How...?',
-        options: ["Option 1", "Option 2", "Option 3", "Option 4"]
-      }],
+          question: 'Why...?',
+          options: ['Option 1', 'Option 2', 'Option 3'],
+        },
+        {
+          question: 'How...?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+      ],
       []
     ),
     new Survey(
+      new Date('2019-11-12'),
+      new Date('2020-01-23'),
       2,
       'Habits of Canadians',
+      'Lifestyle',
       'Mathis Boogie',
-      new Date(),
-      new Date(),
-      [{
-        question: 'What type...?',
-        options: ["Option 1", "Option 2"]
-      },
+      'Math',
+      [
         {
-        question: 'Yes or No...?',
-        options: ["Option 1", "Option 2", "Option 3", "Option 4"]
-      }],
+          question: 'What type...?',
+          options: ['Option 1', 'Option 2'],
+        },
+        {
+          question: 'Yes or No...?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+      ],
       []
     ),
     new Survey(
+      new Date('2018-01-12'),
+      new Date('2018-01-23'),
       3,
       'What is the most popular...',
+      'Lifestyle',
       'Bob Desjardins',
-      new Date(),
-      new Date(),
-      [{
-        question: 'How...?',
-        options: ["Option 1", "Option 2", "Option 3"]
-      },
+      'bobby',
+      [
         {
-        question: 'How...?',
-        options: ["Option 1", "Option 2", "Option 3", "Option 4"]
-      }],
+          question: 'How...?',
+          options: ['Option 1', 'Option 2', 'Option 3'],
+        },
+        {
+          question: 'How...?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+      ],
       []
     ),
     new Survey(
+      new Date('2018-01-12'),
+      new Date('2018-01-23'),
       4,
-      'huefhwbfil gregjkwnl a',
-      'Haaaaaaaaaa',
-      new Date(),
-      new Date(),
-      [{
-        question: 'Why...?',
-        options: ["Option 1", "Option 2", "Option 3"]
-      },
+      'huefhwbfil gregjkwnl',
+      'hgwiufhwi',
+      'Haaaaaaaa',
+      'bdjwbef',
+      [
         {
-        question: 'How...?',
-        options: ["Option 1", "Option 2", "Option 3", "Option 4"]
-      }],
+          question: 'Why...?',
+          options: ['Option 1', 'Option 2', 'Option 3'],
+        },
+        {
+          question: 'How...?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+      ],
       []
     ),
-    
   ];
 
   getSurveys(): Observable<Survey[]> {
