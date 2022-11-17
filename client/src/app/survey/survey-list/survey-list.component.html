@@ -27,7 +27,7 @@
   <div *ngFor="let survey of surveys" class="list-box mt-2 d-flex flex-row">
     <div class="list-del">X</div>
     <div class="list-name">
-      <h5>{{ survey.title }}</h5>
+      <h5>{{ survey.title | slice: 0:100 }}</h5>
     </div>
     <div class="list-type">
       <h5>{{ survey.type }}</h5>
@@ -35,7 +35,7 @@
     <div class="list-status">
       <h5>
         {{
-          survey.dateEnd > today && survey.dateStart < today
+          survey.dateEnd! > today && survey.dateStart! < today
             ? "Active"
             : "Inactive"
         }}
@@ -53,7 +53,7 @@
     <select
       class="form-control"
       [value]="surveysPerPage"
-      (change)="changePageSize($event.target.value)"
+      (change)="changePageSize($any($event.target).value)"
     >
       <option value="3">3 per Page</option>
       <option value="4">4 per Page</option>

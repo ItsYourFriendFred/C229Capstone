@@ -11,6 +11,7 @@
 
 h3 {
   color: #264653;
+  margin-bottom: 3%;
 }
 
 .main-img {
@@ -27,10 +28,16 @@ h3 {
 }
 
 .backdrop {
-    position: relative;
-  margin-top: 13.8%;
-  padding: 5% 25%;
-  background-color: #bec8cc;
+  position: relative;
+  margin-top: 12.5%;
+  padding: 2% 5%;
+  background-color: #F5F5F5;
   text-align: center;
   z-index: 1;
+}
+
+.survey-page {
+    height: 250px;
+    width: 100%;
+    background-color: #fff;
 }

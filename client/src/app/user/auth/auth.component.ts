@@ -10,9 +10,8 @@ import { User } from 'src/app/model/user.model';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  public username: string;
-  public password: string;
-  public errorMessage: string;
+  public user?: User;
+  public errorMessage?: string;
 
   constructor(private router: Router) {}
 

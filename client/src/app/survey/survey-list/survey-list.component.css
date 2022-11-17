@@ -47,7 +47,7 @@ h5 {
 
 .list-name {
   display: inline;
-  width: 20%;
+  width: 30%;
   margin-right: 5%;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@ h5 {
 
 .list-status {
   display: inline;
-  width: 20%;
+  width: 10%;
   margin-right: 5%;
   display: flex;
   align-items: center;
