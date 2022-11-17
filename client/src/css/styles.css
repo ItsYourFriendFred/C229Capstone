@@ -18,6 +18,7 @@ h1 {
   color: #f4a261;
   line-height: 6.5rem;
   font-size: 5rem;
+  margin: 8% 0 4%;
 }
 
 p {
@@ -26,4 +27,40 @@ p {
 
 img {
   z-index: -1;
+}
+
+.btn {
+  color: #264653;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #2a9d8f;
+  border-color: #2a9d8f;
+}
+
+.btn-warning {
+  background-color: #e9c46a;
+  border-color: #e9c46a;
+}
+
+.btn-danger {
+  background-color: #e76f51;
+  border-color: #e76f51;
+}
+
+.btn-primary:hover {
+  background-color: #264653;
+  border-color: #264653;
+}
+
+.btn-warning:hover {
+  background-color: #f4a261;
+  border-color: #f4a261;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #f4a261;
+  border-color: #f4a261;
 }

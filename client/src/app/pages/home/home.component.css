@@ -1,21 +1,36 @@
-body {
-    position: relative;
-    overflow: hidden;
-    width: 100vw;
+.wrapper {
+  position: relative;
+  margin-top: -5%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+    padding-top: 5%;
+}
+
+h3 {
+  color: #264653;
 }
 
 .main-img {
-    position: absolute;
-    top: 15%;
-    left: 40%;
-    width: 70%;
+  display: inline;
+  width: 70%;
+  margin: -40% -10%;
+  float: right;
 }
 
-@media (max-width:768px) {
-    .main-img {
-    position: absolute;
-    top: 25%;
-    left: 20%;
-    width: 70%;
+@media (max-width: 992px) {
+  .main-img {
+    display: none;
+  }
 }
+
+.backdrop {
+    position: relative;
+  margin-top: 13.8%;
+  padding: 5% 25%;
+  background-color: #bec8cc;
+  text-align: center;
+  z-index: 1;
 }

@@ -1,28 +1,105 @@
-h5 {
-    color: #264653;
+h1 {
+  margin-bottom: 4%;
 }
+
+h5 {
+  color: #264653;
+}
+
+.form-control {
+  height: 60px;
+  border-radius: 15px;
+}
+
+.btn-new {
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: large;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-new:hover {
+  background-color: #F4A261;
+}
+
 .list-header {
-  padding: 1% 5% 0.25%;
-  background-color: #d9d9d9;
+  padding: 1% 1% 0.25% 3%;
+  background-color: #BEC8CC;
   border-radius: 20px;
-  opacity: 80%;
-  
+  margin: 5% 0 2%;
+}
+
+.list-box {
+  padding: 1% 1% 1% 3%;
+  background-color: #BEC8CC;
+  border-radius: 20px;
+}
+.list-del {
+  display: inline;
+  width: 3%;
+  margin-right: 2%;
+  color: #e76f51;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
 }
 
 .list-name {
   display: inline;
   width: 20%;
   margin-right: 5%;
+  display: flex;
+  align-items: center;
 }
 
 .list-type {
   display: inline;
   width: 20%;
-   margin-right: 5%;
+  margin-right: 5%;
+  display: flex;
+  align-items: center;
 }
 
 .list-status {
   display: inline;
   width: 20%;
-   margin-right: 5%;
+  margin-right: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.list-edit {
+  display: inline;
+  width: 70px;
+  margin-right: 1%;
+  display: flex;
+  align-items: center;
+}
+.list-duplicate {
+  display: inline;
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-list {
+  width: 100%;
+  height: 75px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: large;
+}
+
+.btn-outline-primary {
+  border-color: #2A9D8F;
+  color: #fff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #2A9D8F;
+}
+
+.btn-outline-primary.active {
+  background-color: #2A9D8F;
 }

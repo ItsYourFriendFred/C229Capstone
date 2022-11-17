@@ -1,10 +1,17 @@
 <div class="container">
   <h1>Survey List</h1>
-  <div class="row">
-    <div class="col-8"><input type="text" /></div>
-    <div class="col-4"><button>New Survey</button></div>
-  </div>
+
+  <form action="">
+    <div class="row">
+      <div class="col-9"><input class="form-control" type="text" /></div>
+      <div class="col-3">
+        <button class="btn btn-primary btn-new">New Survey</button>
+      </div>
+    </div>
+  </form>
+
   <div class="list-header d-flex flex-row">
+    <div class="list-del"></div>
     <div class="list-name">
       <h5>Name</h5>
     </div>
@@ -14,8 +21,11 @@
     <div class="list-status">
       <h5>Status</h5>
     </div>
+    <div class="list-edit"></div>
+    <div class="list-duplicate"></div>
   </div>
-  <div *ngFor="let survey of surveys" class="list-header mt-3 d-flex flex-row">
+  <div *ngFor="let survey of surveys" class="list-box mt-2 d-flex flex-row">
+    <div class="list-del">X</div>
     <div class="list-name">
       <h5>{{ survey.title }}</h5>
     </div>
@@ -23,7 +33,43 @@
       <h5>{{ survey.type }}</h5>
     </div>
     <div class="list-status">
-      <h5>{{ (survey.isActive) ? 'Active': 'Inactive' }}</h5>
+      <h5>
+        {{
+          survey.dateEnd > today && survey.dateStart < today
+            ? "Active"
+            : "Inactive"
+        }}
+      </h5>
     </div>
+    <div class="list-edit">
+      <button type="button" class="btn btn-primary btn-list">Edit</button>
+    </div>
+    <div class="list-duplicate">
+      <button type="button" class="btn btn-warning btn-list">Duplicate</button>
+    </div>
+  </div>
+  <!-- Pages Buttons -->
+  <div class="form-inline float-end mt-2">
+    <select
+      class="form-control"
+      [value]="surveysPerPage"
+      (change)="changePageSize($event.target.value)"
+    >
+      <option value="3">3 per Page</option>
+      <option value="4">4 per Page</option>
+      <option value="6">6 per Page</option>
+      <option value="10">10 per Page</option>
+    </select>
+  </div>
+
+  <div class="btn-group float-start mt-2">
+    <button
+      *counter="let page of pageCount"
+      (click)="changePage(page)"
+      [class.active]="page == selectedPage"
+      class="btn btn-outline-primary"
+    >
+      {{ page }}
+    </button>
   </div>
 </div>
