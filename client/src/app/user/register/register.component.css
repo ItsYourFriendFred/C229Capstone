@@ -17,6 +17,29 @@ p {
 
 .backdrop {
   padding: 0 15% 5%;
-  background-color: #BEC8CC;
+  background-color: #bec8cc;
   border-radius: 20px;
+}
+
+.form-label {
+  margin: 4% 0 1%;
+  color: #264653;
+}
+
+.terms-txt {
+  margin: 4% 0;
+}
+
+.container-center {
+  text-align: center;
+}
+
+.btn {
+    padding: 2% 10%;
+    margin: 0 2% 2%;
+}
+
+.login-txt {
+    font-size: small;
+    font-weight: 600;
 }

@@ -17,6 +17,26 @@ p {
 
 .backdrop {
   padding: 0 25% 5%;
-  background-color: #BEC8CC;
+  background-color: #bec8cc;
   border-radius: 20px;
+}
+
+.forgot-txt {
+  margin: 1% 0 3%;
+  text-align: right;
+}
+
+.container-center {
+  text-align: center;
+  color: #264653;
+}
+
+.btn-primary {
+  margin: 0 0 4%;
+  padding: 2% 10%;
+}
+
+.form-label {
+    margin: 4% 0 1%;
+    color: #264653;
 }

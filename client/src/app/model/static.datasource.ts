@@ -6,7 +6,7 @@ import { Observable, from } from 'rxjs';
 export class StaticDataSource {
   private surveys: Survey[] = [
     new Survey(
-      new Date('2022-12-12'),
+      new Date('2022-11-12'),
       new Date('2022-12-23'),
       1,
       'Why do people love React',

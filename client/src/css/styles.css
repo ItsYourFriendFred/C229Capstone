@@ -18,6 +18,7 @@ h1 {
   color: #f4a261;
   line-height: 6.5rem;
   font-size: 5rem;
+  margin: 8% 0 4%;
 }
 
 p {
@@ -29,38 +30,37 @@ img {
 }
 
 .btn {
-    color:#264653;
-    font-weight: 600;
+  color: #264653;
+  font-weight: 600;
 }
 
 .btn-primary {
-    background-color: #2A9D8F;
-    border-color: #2A9D8F;
+  background-color: #2a9d8f;
+  border-color: #2a9d8f;
 }
 
 .btn-warning {
-   background-color: #E9C46A;
-    border-color: #E9C46A;
+  background-color: #e9c46a;
+  border-color: #e9c46a;
 }
 
 .btn-danger {
- background-color: #E76F51;
-    border-color: #E76F51;
-    
+  background-color: #e76f51;
+  border-color: #e76f51;
 }
 
 .btn-primary:hover {
-    background-color: #264653;
-    border-color: #264653;
+  background-color: #264653;
+  border-color: #264653;
 }
 
 .btn-warning:hover {
-   background-color: #F4A261;
-    border-color: #F4A261;
-    color: #fff;
+  background-color: #f4a261;
+  border-color: #f4a261;
+  color: #fff;
 }
 
 .btn-danger:hover {
- background-color: #F4A261;
-    border-color: #F4A261;
+  background-color: #f4a261;
+  border-color: #f4a261;
 }

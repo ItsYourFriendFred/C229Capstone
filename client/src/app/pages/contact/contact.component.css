@@ -16,3 +16,23 @@ p {
 .form-control {
   margin: 1% 0;
 }
+
+.icon {
+    font-size: 2rem;
+    color: #264653;
+    text-align: right;
+}
+
+.icon-left {
+    font-size: 1.2rem;
+    color: #264653;
+}
+
+.btn {
+    margin-top: 2%;
+    padding: 2% 10%;
+}
+
+.btn-container {
+    text-align: center;
+}

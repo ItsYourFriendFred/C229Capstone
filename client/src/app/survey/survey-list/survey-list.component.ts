@@ -9,7 +9,7 @@ import { SurveyModule } from '../survey.module';
   styleUrls: ['./survey-list.component.css'],
 })
 export class SurveyListComponent implements OnInit {
-  public surveyPerPage = 4;
+  public surveysPerPage = 4;
   public selectedPage = 1;
 
   constructor(private repository: SurveyRepository) {}
@@ -18,13 +18,16 @@ export class SurveyListComponent implements OnInit {
 
   // Getters
   get surveys(): Survey[] {
-    const pageIndex = (this.selectedPage - 1) * this.surveyPerPage;
+    const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
 
     return this.repository
       .getSurveys()
-      .slice(pageIndex, pageIndex + this.surveyPerPage);
+      .slice(pageIndex, pageIndex + this.surveysPerPage);
   }
-
+  
+  get today() : Date {
+    return new Date();
+  } 
 
   get completedSurvey(): Survey[] {
     return this.repository.getCompletedSurvey();
@@ -39,14 +42,14 @@ export class SurveyListComponent implements OnInit {
   }
 
   changePageSize(newSize: number): void {
-    this.surveyPerPage = Number(newSize);
+    this.surveysPerPage = Number(newSize);
     this.changePage(1);
   }
 
   get pageCount(): number {
     return Math.ceil(
       this.repository.getSurveys().length /
-        this.surveyPerPage
+        this.surveysPerPage
     );
   }
 }
