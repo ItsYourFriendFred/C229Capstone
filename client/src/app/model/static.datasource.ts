@@ -23,7 +23,8 @@ export class StaticDataSource {
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         },
       ],
-      []
+      [],
+      true
     ),
     new Survey(
       new Date('2019-11-12'),
@@ -43,7 +44,8 @@ export class StaticDataSource {
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         },
       ],
-      []
+      [],
+      true
     ),
     new Survey(
       new Date('2018-01-12'),
@@ -63,7 +65,8 @@ export class StaticDataSource {
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         },
       ],
-      []
+      [],
+      false
     ),
     new Survey(
       new Date('2018-01-12'),
@@ -83,7 +86,8 @@ export class StaticDataSource {
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         },
       ],
-      []
+      [],
+      false
     ),
   ];
 
