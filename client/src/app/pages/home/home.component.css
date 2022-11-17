@@ -37,7 +37,19 @@ h3 {
 }
 
 .survey-page {
-    height: 250px;
-    width: 100%;
-    background-color: #fff;
+  height: 250px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.survey-card {
+  position: absolute;
+  width: 300px;
+  height: 240px;
+  left: 188px;
+  top: 156px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }
