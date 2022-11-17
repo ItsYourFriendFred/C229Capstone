@@ -51,7 +51,7 @@ export class StaticDataSource {
       new Date('2018-01-12'),
       new Date('2018-01-23'),
       3,
-      'What is the most popular...',
+      'What is the most popular food in india?',
       'Lifestyle',
       'Bob Desjardins',
       'bobby',
