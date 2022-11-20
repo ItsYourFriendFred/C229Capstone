@@ -16,7 +16,7 @@ export function DisplaySurveys(req: express.Request, res: express.Response, next
         }
         //     res.render('index', {title: 'Surveys', page: 'surveys', surveys: surveyCollection, displayName: UserDisplayName(req)});
         // }).sort('title').collation({ locale: 'en', strength: 2 });
-        res.json({ success: true, message: 'Survey Displayed Succesfully', surveys: surveyCollection, user: req.user });
+        res.json(surveyCollection);
     });
 }
 
