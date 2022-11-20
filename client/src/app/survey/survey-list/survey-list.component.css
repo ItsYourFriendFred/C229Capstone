@@ -11,6 +11,22 @@ h5 {
   border-radius: 15px;
 }
 
+a:link { text-decoration: none; 
+  color:#264653;
+}
+
+a:visited { text-decoration: none;
+color:#264653;
+}
+
+a:hover { text-decoration: none;
+color: #fff;
+}
+
+a:active { text-decoration: none;
+color:#264653;
+}
+
 .btn-new {
   border-radius: 15px;
   font-weight: 600;

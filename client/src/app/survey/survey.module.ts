@@ -5,10 +5,11 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
 import { SurveyDetailsComponent } from './survey-details/survey-details.component';
 import { CounterDirective } from './counter.directive';
 import { ModelModule } from '../model/model.module';
+import { NewSurveyComponent } from './new-survey/new-survey.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ModelModule],
-  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective],
+  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent],
   exports: [SurveyListComponent, SurveyDetailsComponent, CounterDirective],
 })
 export class SurveyModule {}
