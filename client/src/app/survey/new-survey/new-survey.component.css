@@ -1,0 +1,22 @@
+.backdrop1 {
+    background-color: #bec8cc;
+    border-radius: 20px;
+    padding: 5% 8% 8%;
+    color: #264653;
+  }
+
+  .backdrop2 {
+    background-color: #bec8cc;
+    border-radius: 20px;
+    padding: 5% 8% 8%;
+    color: #264653;
+  }
+
+  .btn {
+    padding: 3% 30%;
+    margin: 0 2% 2%;
+}
+
+.container-center {
+    text-align: center;
+  }
