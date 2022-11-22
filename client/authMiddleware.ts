@@ -1,3 +1,6 @@
+/*!
+For use with json-server for local testing of the front-end without connecting to the backend
+*/
 import * as jwt from 'jsonwebtoken';
 const App_Secret = 'Secret';
 const Username = 'test';

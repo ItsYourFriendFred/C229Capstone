@@ -1,5 +1,8 @@
 "use strict";
 exports.__esModule = true;
+/*!
+For use with json-server for local testing of the front-end without connecting to the backend
+*/
 var jwt = require("jsonwebtoken");
 var App_Secret = 'Secret';
 var Username = 'test';

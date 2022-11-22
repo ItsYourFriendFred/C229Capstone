@@ -40,9 +40,10 @@
             : "Inactive"
         }}
 
-        {{ survey.dateEnd! | json }}
-        {{ survey.dateStart! | json }}
-        {{ today | json }}
+        <!-- TODO Unexpected behaviour when using relational operators -->
+        <!-- {{ survey.dateEnd! }}
+        {{ survey.dateStart! }}
+        {{ today }} -->
       </h5>
     </div>
     <div class="list-edit">
