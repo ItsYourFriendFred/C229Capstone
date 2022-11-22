@@ -39,6 +39,10 @@
             ? "Active"
             : "Inactive"
         }}
+
+        {{ survey.dateEnd! | json }}
+        {{ survey.dateStart! | json }}
+        {{ today | json }}
       </h5>
     </div>
     <div class="list-edit">

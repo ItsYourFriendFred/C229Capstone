@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { PartialsModule } from './partials/components.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function jwtTokenGetter(): string {
+  return localStorage.getItem('id_token')!;
+}
 
 
 @NgModule({
@@ -20,6 +25,11 @@ import { UserModule } from './user/user.module';
     PartialsModule,
     SurveyModule,
     UserModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: jwtTokenGetter
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

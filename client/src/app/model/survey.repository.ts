@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
 import { StaticDataSource } from './static.datasource';
+import { RestDataSource } from './rest.datasource';
 
 @Injectable()
 export class SurveyRepository {
@@ -8,7 +9,7 @@ export class SurveyRepository {
   private completedSurveys: Survey[] = [];
   private availableSurveys: Survey[] = [];
 
-  constructor(private dataSource: StaticDataSource) {
+  constructor(private dataSource: RestDataSource) {
     dataSource.getSurveys().subscribe((data) => {
       this.surveys = data;
       let today = new Date();
