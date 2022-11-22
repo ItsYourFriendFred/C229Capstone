@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const surveys_1 = require("../controllers/surveys");
-router.get('/surveys', surveys_1.DisplaySurveys);
+router.get('/survey-list', surveys_1.DisplaySurveys);
 router.get('/surveys/add', surveys_1.DisplayAddPage);
 router.get('/surveys/edit/:id', surveys_1.DisplayEditPage);
 router.post('/surveys/add', surveys_1.ProcessAddPage);

@@ -20,7 +20,8 @@ const routes: Routes = [
   {path: 'survey-details', component: SurveyDetailsComponent, data: {title: ''}},
   {path: 'login', component: LoginComponent, data: {title: ''}},
   {path: 'register', component: RegisterComponent, data: {title: ''}},
-  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}}
+  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}},
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

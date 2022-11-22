@@ -11,7 +11,7 @@ import {
 @Directive({
   selector: '[counterOf]',
 })
-export class CounterDirective {
+export class CounterDirective implements OnChanges {
   constructor(
     private container: ViewContainerRef,
     private template: TemplateRef<any>
