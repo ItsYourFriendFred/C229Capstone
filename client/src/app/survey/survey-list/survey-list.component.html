@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-9"><input class="form-control" type="text" /></div>
       <div class="col-3">
-        <button class="btn btn-primary btn-new"><a href="../new-survey/">New Survey</a></button>
+        <a href="/new-survey"><button class="btn btn-primary btn-new">New Survey</button></a>
       </div>
     </div>
   </form>
@@ -13,7 +13,7 @@
   <div class="list-header d-flex flex-row">
     <div class="list-del"></div>
     <div class="list-name">
-      <h5>Name</h5>
+      <h5>Name</h5> 
     </div>
     <div class="list-type">
       <h5>Survey Type</h5>
@@ -39,7 +39,6 @@
             ? "Active"
             : "Inactive"
         }}
-
         <!-- TODO Unexpected behaviour when using relational operators -->
         <!-- {{ survey.dateEnd! }}
         {{ survey.dateStart! }}
@@ -47,10 +46,10 @@
       </h5>
     </div>
     <div class="list-edit">
-      <button type="button" class="btn btn-primary btn-list">Edit</button>
+      <a href="/edit/{{survey._id}}"><button type="button" class="btn btn-primary btn-list">Edit</button></a>
     </div>
     <div class="list-duplicate">
-      <button type="button" class="btn btn-warning btn-list">Duplicate</button>
+      <a href="/delete/{{survey._id}}"><button type="button" class="btn btn-warning btn-list">Duplicate</button></a>
     </div>
   </div>
   <!-- Pages Buttons -->
