@@ -1,6 +1,77 @@
 <div class="container">
-    <h1>
-      Survey Details
-    </h1>
-  </div>
-  
+  <h1>Edit Survey</h1>
+  <form action="">
+    <!-- General Survey Details -->
+    <div class="backdrop">
+      <h3>Survey Name:</h3>
+      <input class="form-control" type="text" value="{{ survey.title }}" />
+      <h3>Survey Type:</h3>
+      <input class="form-control" type="text" value="{{ survey.type }}" />
+      <h3>Availibilities:</h3>
+      <input
+        class="form-control"
+        type="date"
+        value="{{ survey.dateStart!.toISOString().split('T')[0] }}"
+      />
+      <input
+        class="form-control"
+        type="date"
+        value="{{ survey.dateEnd!.toISOString().split('T')[0] }}"
+      />
+    </div>
+
+    <!-- Questions Bloc -->
+    <div
+      *ngFor="let questionBloc of survey.questionsBloc; let i = index"
+      class="backdrop"
+    >
+      <h3>Question {{ i + 1 }}:</h3>
+      <input
+        class="form-control"
+        type="text"
+        value="{{ questionBloc.question }}"
+      />
+      <h3>Options:</h3>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div
+              *ngFor="let option of questionBloc.options"
+              class="col-md-6 mb-2"
+            >
+              <input class="form-control" type="text" value="{{ option }}" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-warning mb-2">Add Option</button>
+          <button class="btn btn-danger mb-2">Delete Question</button>
+        </div>
+      </div>
+    </div>
+    <!-- Add question button -->
+    <div class="row">
+      <div class="col-8"></div>
+      <div class="col-4">
+        <button class="btn btn-warning btn-end-form mb-4">Add Question</button>
+      </div>
+    </div>
+
+    <!-- Form saving buttons -->
+    <div class="container-center">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-danger btn-end-form" routerLink="/survey-list">
+            Cancel
+          </button>
+        </div>
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary btn-end-form">
+            Save Survey
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
