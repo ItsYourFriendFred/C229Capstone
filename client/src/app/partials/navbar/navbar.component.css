@@ -1,5 +1,5 @@
 nav {
-  padding: 0.5% 1%;
+  padding: 0.5% 0;
   z-index: 10;
   background-color: #264653;
 }
@@ -10,9 +10,13 @@ li {
 
 a {
   font-family: "Manrope", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.1rem;
   color: #FFFFFF;
+}
+
+a:hover {
+  color: #e9c46a;
 }
 
 .active-link {
