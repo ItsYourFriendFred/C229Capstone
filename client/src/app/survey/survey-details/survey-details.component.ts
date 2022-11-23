@@ -11,23 +11,36 @@ import { param } from 'jquery';
   styleUrls: ['./survey-details.component.css'],
 })
 export class SurveyDetailsComponent implements OnInit {
-  private surveyID: string;
+  private surveyID?: string;
+  private surveyToEdit?: Survey;
 
   constructor(
     private repository: SurveyRepository,
     private route: ActivatedRoute
-  ) {
-    this.surveyID = '';
-  }
+  ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.surveyID = params['id'];
-    });
-  }
+  ngOnInit(): void {}
 
   get survey(): Survey {
-    console.log(this.surveyID);
-    return this.repository.getSurvey(this.surveyID);
+    this.route.params.subscribe((params) => {
+      this.surveyID = params['id'];
+      this.surveyToEdit = this.repository.getSurvey(this.surveyID!);
+    });
+    return this.surveyToEdit!;
+  }
+
+  addQuestion(): void {
+    this.surveyToEdit!.questionsBloc!.push({ question: '', options: [''] });
+  }
+
+  addOption(i: number): void {
+    this.surveyToEdit!.questionsBloc![i].options!.push('');
+  }
+
+  deleteQuestion(i: number): void {
+    this.surveyToEdit!.questionsBloc!.splice(i, 1);
+  }
+  deleteOption(i: number, j: number): void {
+    this.surveyToEdit!.questionsBloc![i].options!.splice(j, 1);
   }
 }
