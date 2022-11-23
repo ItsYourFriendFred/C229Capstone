@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Add Survey</h1>
-  <form action="">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>

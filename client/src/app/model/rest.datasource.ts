@@ -34,4 +34,14 @@ export class RestDataSource {
         this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this.authToken);
     }
 
+    addSurvey(survey: Survey): Observable<Survey> {
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(this.baseUrl + 'api/surveys/add', survey);
+    }
+
+    saveSurvey(survey: Survey): Observable<Survey> {
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(this.baseUrl + 'api/surveys/edit/:id', survey);
+    }
+
 }
