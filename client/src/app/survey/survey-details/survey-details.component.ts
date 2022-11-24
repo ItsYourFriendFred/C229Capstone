@@ -5,6 +5,8 @@ import { SurveyModule } from '../survey.module';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { param } from 'jquery';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-survey-details',
   templateUrl: './survey-details.component.html',
@@ -13,6 +15,7 @@ import { param } from 'jquery';
 export class SurveyDetailsComponent implements OnInit {
   private surveyID?: string;
   private surveyToEdit?: Survey;
+  private submitted = false;
 
   constructor(
     private repository: SurveyRepository,
@@ -42,5 +45,14 @@ export class SurveyDetailsComponent implements OnInit {
   }
   deleteOption(i: number, j: number): void {
     this.surveyToEdit!.questionsBloc![i].options!.splice(j, 1);
+  }
+
+  onSubmit(form: NgForm): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.saveSurvey(this.survey).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
 }

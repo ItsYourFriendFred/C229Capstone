@@ -2,7 +2,7 @@
 Callback functions corresponding to routes handling survey (database) requests
 */
 import express from 'express';
-import { CallbackError } from 'mongoose';
+import mongoose, { CallbackError } from 'mongoose';
 
 import Survey from '../models/survey';
 
@@ -45,10 +45,13 @@ export function ProcessAddPage(req: express.Request, res: express.Response, next
     // Instantiate a new Survey to add
     let newSurvey = new Survey(
         {
-            "title": req.body.title,
-            "author": req.body.author,
             "dateStart": new Date(req.body.dateStart),
-            "dateEnd": new Date(req.body.dateEnd)
+            "dateEnd": new Date(req.body.dateEnd),
+            "title": req.body.title,
+            "type": req.body.type,
+            "author": req.body.author,
+            "user": req.body.user,
+            "questionsBloc": req.body.questionsBloc
             // isActive set below
         }
     );
@@ -69,21 +72,23 @@ export function ProcessEditPage(req: express.Request, res: express.Response, nex
     // Instantiate a new survey to edit
     let updatedSurvey = new Survey(
         {
-            "_id": id,
+            "dateStart": new Date(req.body.dateStart),
+            "dateEnd": new Date(req.body.dateEnd),
             "title": req.body.title,
+            "type": req.body.type,
             "author": req.body.author,
-            "dateStart": req.body.dateStart,
-            "dateEnd": req.body.dateEnd,
+            "user": req.body.user,
+            "questionsBloc": req.body.questionsBloc
         }
     );
 
     // Update the survey in the database
-    Survey.updateOne({_id: id}, updatedSurvey, function(err: CallbackError) {
+    Survey.findByIdAndUpdate(req.params.id, updatedSurvey, function(err: CallbackError) {
         if (err) {
             console.error(err);
             res.end(err);
         }
-
+        console.log(updatedSurvey);
         res.json({success: true, message: 'Successfully edited survey!', survey: updatedSurvey});
     });
 }

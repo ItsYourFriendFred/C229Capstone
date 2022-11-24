@@ -32,10 +32,13 @@ function DisplayEditPage(req, res, next) {
 exports.DisplayEditPage = DisplayEditPage;
 function ProcessAddPage(req, res, next) {
     let newSurvey = new survey_1.default({
-        "title": req.body.title,
-        "author": req.body.author,
         "dateStart": new Date(req.body.dateStart),
-        "dateEnd": new Date(req.body.dateEnd)
+        "dateEnd": new Date(req.body.dateEnd),
+        "title": req.body.title,
+        "type": req.body.type,
+        "author": req.body.author,
+        "user": req.body.user,
+        "questionsBloc": req.body.questionsBloc
     });
     newSurvey.isActive = true;
     survey_1.default.create(newSurvey, function (err) {
@@ -50,17 +53,20 @@ exports.ProcessAddPage = ProcessAddPage;
 function ProcessEditPage(req, res, next) {
     let id = req.params.id;
     let updatedSurvey = new survey_1.default({
-        "_id": id,
+        "dateStart": new Date(req.body.dateStart),
+        "dateEnd": new Date(req.body.dateEnd),
         "title": req.body.title,
+        "type": req.body.type,
         "author": req.body.author,
-        "dateStart": req.body.dateStart,
-        "dateEnd": req.body.dateEnd,
+        "user": req.body.user,
+        "questionsBloc": req.body.questionsBloc
     });
-    survey_1.default.updateOne({ _id: id }, updatedSurvey, function (err) {
+    survey_1.default.findByIdAndUpdate(req.params.id, updatedSurvey, function (err) {
         if (err) {
             console.error(err);
             res.end(err);
         }
+        console.log(updatedSurvey);
         res.json({ success: true, message: 'Successfully edited survey!', survey: updatedSurvey });
     });
 }

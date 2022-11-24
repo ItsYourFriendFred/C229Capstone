@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
-import { SurveyModule } from '../survey.module';
-import { Subscription } from 'rxjs';
-import { Title } from '@angular/platform-browser';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-survey',
@@ -11,6 +10,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./new-survey.component.css'],
 })
 export class NewSurveyComponent implements OnInit {
+  private submitted = false;
+
   constructor(private repository: SurveyRepository) {}
 
   ngOnInit(): void {}
@@ -46,5 +47,14 @@ export class NewSurveyComponent implements OnInit {
   
   deleteOption(i: number, j: number): void {
     this.surveyToAdd!.questionsBloc![i].options!.splice(j, 1);
+  }
+
+  onSubmit(form: NgForm): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.addSurvey(this.survey).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
 }

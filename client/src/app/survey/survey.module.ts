@@ -11,6 +11,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [BrowserModule, FormsModule, ModelModule, RouterModule],
   declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent],
-  exports: [SurveyListComponent, SurveyDetailsComponent, CounterDirective],
+  exports: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent],
 })
 export class SurveyModule {}
