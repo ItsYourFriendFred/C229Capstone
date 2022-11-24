@@ -15,6 +15,7 @@ import {
   Form,
 } from '@angular/forms';
 
+
 @Component({
   selector: 'app-new-survey',
   templateUrl: './new-survey.component.html',
@@ -22,6 +23,7 @@ import {
 })
 export class NewSurveyComponent implements OnInit {
   surveyForm!: FormGroup;
+  private submitted = false;
 
   constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
@@ -84,5 +86,14 @@ export class NewSurveyComponent implements OnInit {
 
   onSubmit(form: any) {
     console.log(form.value);
+  }
+
+  onSubmit(form: NgForm): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.addSurvey(this.survey).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
 }
