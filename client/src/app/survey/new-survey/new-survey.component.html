@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Add Survey</h1>
-  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>
@@ -37,14 +37,13 @@
       />
     </div>
 
-    <!-- Questions Bloc -->
-
-    <div
-      formArrayName="questions"
-      *ngFor="let question of questions.controls; let i = index"
-      class="backdrop"
-    >
-      <div [formGroupName]="i">
+    <!-- Questions -->
+    <div formArrayName="questionsBloc">
+      <div
+        [formGroupName]="i"
+        *ngFor="let question of getQuestions(surveyForm); let i = index"
+        class="backdrop"
+      >
         <h3>Question {{ i + 1 }}:</h3>
         <input
           formControlName="question"
@@ -53,31 +52,36 @@
           class="form-control"
           type="text"
         />
+
+        <!-- Options -->
+
         <h3>Options:</h3>
         <div class="row">
           <div class="col-md-8">
-            <div class="row">
-              <!-- <div
-                formArrayName="options"
-                *ngFor="let option of options.controls; let j = index"
-                class="col-md-6 mb-2"
-              >
-                <input
-                  formControlName="option"
-                  name="option"
-                  id="option"
-                  class="form-control"
-                  type="text"
-                />
-                <a class="a-del-option" (click)="deleteOption(i, j)">X</a>
-              </div> -->
+            <div formArrayName="options">
+              <div class="row">
+                <div
+                  [formGroupName]="j"
+                  *ngFor="let option of getOptions(question); let j = index"
+                  class="col-md-6 mb-2"
+                >
+                  <input
+                    formControlName="option"
+                    name="option"
+                    id="option"
+                    class="form-control"
+                    type="text"
+                  />
+                  <a class="a-del-option" (click)="removeOption(i,j)">X</a>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <button class="btn btn-warning mb-2" (click)="addOption(i)">
               Add Option
             </button>
-            <button class="btn btn-danger mb-2" (click)="deleteQuestion(i)">
+            <button class="btn btn-danger mb-2" (click)="removeQuestion(i)">
               Delete Question
             </button>
           </div>
@@ -111,10 +115,7 @@
         </div>
 
         <div class="col-md-6">
-          <button
-            type="submit"
-            class="btn btn-primary btn-end-form"
-          >
+          <button type="submit" class="btn btn-primary btn-end-form">
             Save Survey
           </button>
         </div>

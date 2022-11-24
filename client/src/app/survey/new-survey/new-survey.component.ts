@@ -10,13 +10,10 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  Validators,
   ReactiveFormsModule,
+  Form,
 } from '@angular/forms';
-
-// type questionBloc = {
-//   question: string;
-//   options: string[];
-// };
 
 @Component({
   selector: 'app-new-survey',
@@ -24,108 +21,68 @@ import {
   styleUrls: ['./new-survey.component.css'],
 })
 export class NewSurveyComponent implements OnInit {
-  // surveyForm = new FormGroup({
-  //   title: new FormControl(),
-  //   type: new FormControl(),
-  //   dateStart: new FormControl(),
-  //   dateEnd: new FormControl(),
-  //   questionsBloc: new FormGroup({
-  //     question: new FormControl(),
-  //     options: new FormControl(),
-  //   }),
-  // });
+  surveyForm!: FormGroup;
 
-  // questionsBloc = new FormGroup({
-  //   question: new FormControl(),
-  //   options: new FormControl(),
-  // });
+  constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
-  //Field Variable
-  // title: string = '';
-  // type: string = '';
-  // dateStart: Date = new Date();
-  // dateEnd: Date = new Date();
-  // questionsBloc: questionBloc[] = [
-  //   {
-  //     question: '',
-  //     options: [''],
-  //   },
-  // ];
-  surveyForm: FormGroup;
-
-  constructor(private repository: SurveyRepository, private fb: FormBuilder) {
-    this.surveyForm = this.fb.group({
-      title: '',
-      type: '',
-      dateStart: new Date().toISOString().split('T')[0],
-      dateEnd: new Date().toISOString().split('T')[0],
-      questions: this.fb.array([
-        this.fb.group({
-          question: '',
-          options: this.fb.array(['']),
-        }),
-      ]),
-
-      // questionsBloc: this.fb.group({
-      //   question: '',
-      //   options:this.fb.array([""])
-      // })
-    });
-
-    // question: "",
-    // options: this._formBuilder.array([]),
-  }
-
-  ngOnInit(): void {}
-
-  get questions(): FormArray {
-    return this.surveyForm.get('questions') as FormArray;
-  }
-
-  get options(): FormArray {
-    return this.questions.get('options') as FormArray;
-  }
-
-  newQuestion(): FormGroup {
-    return this.fb.group({
-      question: '',
-      options: this.fb.array(['']),
+  ngOnInit() {
+    this.surveyForm = new FormGroup({
+      title: new FormControl(''),
+      type: new FormControl(''),
+      dateStart: new FormControl(new Date().toISOString().split('T')[0]),
+      dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
+      questionsBloc: new FormArray([this.initQuestion()]),
     });
   }
 
-  addQuestion(): void {
-    this.questions.push(this.newQuestion());
-
-    // this.questionArray.push({ question: '', options: [''] });
-    // this.questionsBloc.push({ question: '', options: [''] });
-
-    // this.surveyForm.questionsBloc.push(
-    //   this._formBuilder.control({ question: '', options: [''] })
-    // );
+  initQuestion() {
+    return new FormGroup({
+      question: new FormControl(),
+      options: new FormArray([this.initOption()]),
+    });
   }
 
-  addOption(i: number): void {
-    // this.questionsBloc[i].options.push('');
+  initOption() {
+    return new FormGroup({
+      option: new FormControl('')
+    });
   }
 
-  deleteQuestion(i: number): void {
-    this.questions.removeAt(i);
-    // this.questionsBloc.splice(i, 1);
+  addQuestion() {
+    const control = <FormArray>this.surveyForm.get('questionsBloc');
+    control.push(this.initQuestion());
   }
 
-  deleteOption(i: number, j: number): void {
-    // this.questionsBloc[i].options.splice(j, 1);
+  addOption(j: number) {
+    console.log(j);
+    const control = <FormArray>(
+      this.surveyForm.get(['questionsBloc', j, 'options'])
+    );
+    control.push(this.initOption());
   }
 
-  onSubmit(): void {
-    console.log(this.surveyForm.value);
-    // var survey: Survey = {
-    //   title: this.title,
-    //   type: this.type,
-    //   dateStart: this.dateStart,
-    //   dateEnd: this.dateEnd,
-    //   questionsBloc: this.questionsBloc,
-    // };
-    // console.log(survey);
+  getQuestions(form: any) {
+    return form.controls.questionsBloc.controls;
+  }
+
+  getOptions(form: any) {
+    return form.controls.options.controls;
+  }
+
+  removeQuestion(i: number) {
+    const control = <FormArray>this.surveyForm.get('questionsBloc');
+    control.removeAt(i);
+  }
+
+  removeOption(i: number, j: number) {
+    console.log(j);
+    const control = <FormArray>(
+      this.surveyForm.get(['questionsBloc', i, 'options'])
+    );
+    control.removeAt(j);
+  }
+
+  onSubmit(form: any) {
+    console.log(form.value);
   }
 }
