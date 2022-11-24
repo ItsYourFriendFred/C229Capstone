@@ -4,20 +4,20 @@
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>
-      <input class="form-control" type="text" value="{{ survey.title }}" />
+      <input class="form-control" type="text" value="{{ survey.title }}" #title='ngModel' [(ngModel)]='survey.title' [ngModelOptions]='{standalone: true}' required/>
       <h3>Survey Type:</h3>
-      <input class="form-control" type="text" value="{{ survey.type }}" />
+      <input class="form-control" type="text" value="{{ survey.type }}" #type='ngModel' [(ngModel)]='survey.type' [ngModelOptions]='{standalone: true}' required/>
       <h3>Availibilities:</h3>
       <input
         class="form-control"
         type="date"
         value="{{ survey.dateStart!.toISOString().split('T')[0] }}"
-      />
+        #dateStart='ngModel' [(ngModel)]='survey.dateStart' [ngModelOptions]='{standalone: true}' required/>
       <input
         class="form-control"
         type="date"
         value="{{ survey.dateEnd!.toISOString().split('T')[0] }}"
-      />
+        #dateEnd='ngModel' [(ngModel)]='survey.dateEnd' [ngModelOptions]='{standalone: true}' required/>
     </div>
 
     <!-- Questions Bloc -->
@@ -30,7 +30,7 @@
         class="form-control"
         type="text"
         value="{{ questionBloc.question }}"
-      />
+        #questionsBloc![i].question='ngModel' [(ngModel)]='survey.questionsBloc![i].question' [ngModelOptions]='{standalone: true}' required/>
       <h3>Options:</h3>
       <div class="row">
         <div class="col-md-8">
@@ -39,7 +39,8 @@
               *ngFor="let option of questionBloc.options; let j = index"
               class="col-md-6 mb-2"
             >
-              <input class="form-control" type="text" value="{{ option }}" />
+              <input class="form-control" type="text" value="{{ option }}" 
+              #questionsBloc![i].options='ngModel' [(ngModel)]='survey.questionsBloc![i].options![j]' [ngModelOptions]='{standalone: true}' required/>
               <a class="a-del-option"(click)="deleteOption(i, j)">X</a>
             </div>
           </div>
