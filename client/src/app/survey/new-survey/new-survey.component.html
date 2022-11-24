@@ -1,61 +1,100 @@
 <div class="container">
   <h1>Add Survey</h1>
-  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>
-      <input class="form-control" type="text" value="{{ survey.title }}" #title='ngModel' [(ngModel)]='survey.title' [ngModelOptions]='{standalone: true}' required/>
+      <input
+        formControlName="title"
+        name="title"
+        id="title"
+        class="form-control"
+        type="text"
+      />
       <h3>Survey Type:</h3>
-      <input class="form-control" type="text" value="{{ survey.type }}" #type='ngModel' [(ngModel)]='survey.type' [ngModelOptions]='{standalone: true}' required/>
+      <input
+        formControlName="type"
+        name="type"
+        id="type"
+        class="form-control"
+        type="text"
+      />
       <h3>Availibilities:</h3>
+      <!-- [(ngModel)]="dateStart.toISOString().split('T')[0]" -->
       <input
+        formControlName="dateStart"
+        name="dateStart"
+        id="dateStart"
         class="form-control"
         type="date"
-        value="{{ survey.dateStart!.toISOString().split('T')[0] }}"
-        #dateStart='ngModel' [(ngModel)]='survey.dateStart' [ngModelOptions]='{standalone: true}' required/>
+      />
       <input
+        formControlName="dateEnd"
+        name="dateEnd"
+        id="dateEnd"
         class="form-control"
         type="date"
-        value="{{ survey.dateEnd!.toISOString().split('T')[0] }}"
-        #dateEnd='ngModel' [(ngModel)]='survey.dateEnd' [ngModelOptions]='{standalone: true}' required/>
+      />
     </div>
 
     <!-- Questions Bloc -->
+
     <div
-      *ngFor="let questionBloc of survey.questionsBloc; let i = index"
+      formArrayName="questions"
+      *ngFor="let question of questions.controls; let i = index"
       class="backdrop"
     >
-      <h3>Question {{ i + 1 }}:</h3>
-      <input
-        class="form-control"
-        type="text"
-        value="{{ questionBloc.question }}"
-        #questionsBloc![i].question='ngModel' [(ngModel)]='survey.questionsBloc![i].question' [ngModelOptions]='{standalone: true}' required/>
-      <h3>Options:</h3>
-      <div class="row">
-        <div class="col-md-8">
-          <div class="row">
-            <div
-              *ngFor="let option of questionBloc.options; let j = index"
-              class="col-md-6 mb-2"
-            >
-              <input class="form-control" type="text" value="{{ option }}" 
-              #questionsBloc![i].options='ngModel' [(ngModel)]='survey.questionsBloc![i].options![j]' [ngModelOptions]='{standalone: true}' required/>
-              <a class="a-del-option"(click)="deleteOption(i, j)">X</a>
+      <div [formGroupName]="i">
+        <h3>Question {{ i + 1 }}:</h3>
+        <input
+          formControlName="question"
+          id="question"
+          name="question"
+          class="form-control"
+          type="text"
+        />
+        <h3>Options:</h3>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <!-- <div
+                formArrayName="options"
+                *ngFor="let option of options.controls; let j = index"
+                class="col-md-6 mb-2"
+              >
+                <input
+                  formControlName="option"
+                  name="option"
+                  id="option"
+                  class="form-control"
+                  type="text"
+                />
+                <a class="a-del-option" (click)="deleteOption(i, j)">X</a>
+              </div> -->
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-warning mb-2" (click)="addOption(i);">Add Option</button>
-          <button class="btn btn-danger mb-2" (click)="deleteQuestion(i);">Delete Question</button>
+          <div class="col-md-4">
+            <button class="btn btn-warning mb-2" (click)="addOption(i)">
+              Add Option
+            </button>
+            <button class="btn btn-danger mb-2" (click)="deleteQuestion(i)">
+              Delete Question
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
     <!-- Add question button -->
     <div class="row">
       <div class="col-8"></div>
       <div class="col-4">
-        <button class="btn btn-warning btn-end-form mb-4" (click)="addQuestion();">Add Question</button>
+        <button
+          class="btn btn-warning btn-end-form mb-4"
+          (click)="addQuestion()"
+        >
+          Add Question
+        </button>
       </div>
     </div>
 
@@ -63,13 +102,19 @@
     <div class="container-center">
       <div class="row">
         <div class="col-md-6">
-          <button class="btn btn-danger btn-end-form mb-2" routerLink="/survey-list">
+          <button
+            class="btn btn-danger btn-end-form mb-2"
+            routerLink="/survey-list"
+          >
             Cancel
           </button>
         </div>
 
         <div class="col-md-6">
-          <button type="submit" class="btn btn-primary btn-end-form">
+          <button
+            type="submit"
+            class="btn btn-primary btn-end-form"
+          >
             Save Survey
           </button>
         </div>
