@@ -18,9 +18,11 @@ const routes: Routes = [
   {path: 'faq', component: FaqComponent, data: {title: ''}},
   {path: 'survey-list', component: SurveyListComponent, data: {title: ''}},
   {path: 'survey-details', component: SurveyDetailsComponent, data: {title: ''}},
+  {path: 'edit/:id', component: SurveyDetailsComponent, data: {title: ''}},
   {path: 'login', component: LoginComponent, data: {title: ''}},
   {path: 'register', component: RegisterComponent, data: {title: ''}},
-  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}}
+  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}},
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

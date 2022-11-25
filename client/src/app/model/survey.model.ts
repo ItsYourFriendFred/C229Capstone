@@ -2,7 +2,7 @@ export class Survey {
   constructor(
     public dateStart?: Date,
     public dateEnd?: Date,
-    public _id?: number,
+    public _id?: string,
     public title?: string,
     public type?: string,
     public author?: string,

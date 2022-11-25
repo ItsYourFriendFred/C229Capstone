@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
 import { StaticDataSource } from './static.datasource';
+import { RestDataSource } from './rest.datasource';
 
 @Injectable()
 export class SurveyRepository {
@@ -8,8 +9,13 @@ export class SurveyRepository {
   private completedSurveys: Survey[] = [];
   private availableSurveys: Survey[] = [];
 
-  constructor(private dataSource: StaticDataSource) {
+  constructor(private dataSource: RestDataSource) {
     dataSource.getSurveys().subscribe((data) => {
+      data.forEach(element => {
+        element.dateEnd = new Date(element.dateEnd!);
+        element.dateStart = new Date(element.dateStart!);
+      });
+
       this.surveys = data;
       let today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -23,12 +29,13 @@ export class SurveyRepository {
   }
 
   getSurveys(user: string = null!): Survey[] {
-    return this.surveys.filter(
+    return this.surveys
+    .filter(
       (survey) => user == null || user === survey.user
     );
   }
 
-  getSurvey(id: number): Survey {
+  getSurvey(id: string): Survey {
     return this.surveys.find((survey) => survey._id === id)!;
   }
 

@@ -126,7 +126,8 @@ passport.use(strategy);
 
 // Use routes
 app.use('/api', authRouter);
-app.use('/api', passport.authenticate('jwt', {session: false}), surveysRouter);
+app.use('/api', surveysRouter);
+// app.use('/api', passport.authenticate('jwt', {session: false}), surveysRouter);
 // app.use('/api', usersRouter);
 
 // catch 404 and forward to error handler

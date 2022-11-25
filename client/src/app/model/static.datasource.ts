@@ -8,7 +8,7 @@ export class StaticDataSource {
     new Survey(
       new Date('2022-11-12'),
       new Date('2022-12-23'),
-      1,
+      "1",
       'Why do people love React',
       'Technology',
       'Benjamin Lefebvre',
@@ -29,7 +29,7 @@ export class StaticDataSource {
     new Survey(
       new Date('2019-11-12'),
       new Date('2020-01-23'),
-      2,
+      "2",
       'Habits of Canadians',
       'Lifestyle',
       'Mathis Boogie',
@@ -50,7 +50,7 @@ export class StaticDataSource {
     new Survey(
       new Date('2018-01-12'),
       new Date('2018-01-23'),
-      3,
+      "3",
       'What is the most popular food in india?',
       'Lifestyle',
       'Bob Desjardins',
@@ -71,7 +71,7 @@ export class StaticDataSource {
     new Survey(
       new Date('2018-01-12'),
       new Date('2018-01-23'),
-      4,
+      "4",
       'huefhwbfil gregjkwnl',
       'hgwiufhwi',
       'Haaaaaaaa',

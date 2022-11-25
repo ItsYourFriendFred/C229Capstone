@@ -1,6 +1,124 @@
 <div class="container">
-    <h1>
-      Survey Details
-    </h1>
-  </div>
-  
+  <h1>Edit Survey</h1>
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
+    <!-- General Survey Details -->
+    <div class="backdrop">
+      <h3>Survey Name:</h3>
+      <input
+        formControlName="title"
+        name="title"
+        id="title"
+        class="form-control"
+        type="text"
+      />
+      <h3>Survey Type:</h3>
+      <input
+        formControlName="type"
+        name="type"
+        id="type"
+        class="form-control"
+        type="text"
+      />
+      <h3>Availibilities:</h3>
+      <!-- [(ngModel)]="dateStart.toISOString().split('T')[0]" -->
+      <input
+        formControlName="dateStart"
+        name="dateStart"
+        id="dateStart"
+        class="form-control"
+        type="date"
+      />
+      <input
+        formControlName="dateEnd"
+        name="dateEnd"
+        id="dateEnd"
+        class="form-control"
+        type="date"
+      />
+    </div>
+
+    <!-- Questions -->
+    <div formArrayName="questionsBloc">
+      <div
+        [formGroupName]="i"
+        *ngFor="let question of getQuestions(surveyForm); let i = index"
+        class="backdrop"
+      >
+        <h3>Question {{ i + 1 }}:</h3>
+        <input
+          formControlName="question"
+          id="question"
+          name="question"
+          class="form-control"
+          type="text"
+        />
+
+        <!-- Options -->
+
+        <h3>Options:</h3>
+        <div class="row">
+          <div class="col-md-8">
+            <div formArrayName="options">
+              <div class="row">
+                <div
+                  *ngFor="let option of getOptions(question); let j = index"
+                  class="col-md-6 mb-2"
+                >
+                  <input
+                    [formControlName]="j"
+                    name="option"
+                    id="option"
+                    class="form-control"
+                    type="text"
+                  />
+                  <a class="a-del-option" (click)="removeOption(i, j)">X</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-warning mb-2" (click)="addOption(i)">
+              Add Option
+            </button>
+            <button class="btn btn-danger mb-2" (click)="removeQuestion(i)">
+              Delete Question
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add question button -->
+    <div class="row">
+      <div class="col-8"></div>
+      <div class="col-4">
+        <button
+          class="btn btn-warning btn-end-form mb-4"
+          (click)="addQuestion()"
+        >
+          Add Question
+        </button>
+      </div>
+    </div>
+
+    <!-- Form saving buttons -->
+    <div class="container-center">
+      <div class="row">
+        <div class="col-md-6">
+          <button
+            class="btn btn-danger btn-end-form mb-2"
+            routerLink="/survey-list"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary btn-end-form">
+            Save Survey
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

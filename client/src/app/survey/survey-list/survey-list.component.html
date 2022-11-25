@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-9"><input class="form-control" type="text" /></div>
       <div class="col-3">
-        <button class="btn btn-primary btn-new"><a href="../new-survey/">New Survey</a></button>
+        <button class="btn btn-primary btn-new" routerLink="/new-survey">New Survey</button>
       </div>
     </div>
   </form>
@@ -42,19 +42,15 @@
       </h5>
     </div>
     <div class="list-edit">
-      <button type="button" class="btn btn-primary btn-list">Edit</button>
+      <button type="button" class="btn btn-primary btn-list" routerLink="/edit/{{survey._id}}">Edit</button>
     </div>
     <div class="list-duplicate">
-      <button type="button" class="btn btn-warning btn-list">Duplicate</button>
+      <button type="button" class="btn btn-warning btn-list" routerLink="/delete/{{survey._id}}">Duplicate</button>
     </div>
   </div>
   <!-- Pages Buttons -->
   <div class="form-inline float-end mt-2">
-    <select
-      class="form-control"
-      [value]="surveysPerPage"
-      (change)="changePageSize($any($event.target).value)"
-    >
+    <select class="form-control" [value]="surveysPerPage" (change)="changePageSize($any($event.target).value)">
       <option value="3">3 per Page</option>
       <option value="4">4 per Page</option>
       <option value="6">6 per Page</option>
@@ -63,12 +59,8 @@
   </div>
 
   <div class="btn-group float-start mt-2">
-    <button
-      *counter="let page of pageCount"
-      (click)="changePage(page)"
-      [class.active]="page == selectedPage"
-      class="btn btn-outline-primary"
-    >
+    <button *counter="let page of pageCount" (click)="changePage(page)" [class.active]="page == selectedPage"
+      class="btn btn-outline-primary">
       {{ page }}
     </button>
   </div>

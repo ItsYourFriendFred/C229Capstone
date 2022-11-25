@@ -11,7 +11,7 @@ import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, Proces
 
 // Surveys Page GET request 
 // Temp remove Authguard for api conversion ^v
-router.get('/surveys', DisplaySurveys);
+router.get('/survey-list', DisplaySurveys);
 
 
 // Add Page GET request
