@@ -48,11 +48,12 @@ export class SurveyRepository {
     return this.availableSurveys;
   }
 
+  addSurvey(survey: Survey): Observable<Survey> {
+    return this.dataSource.addSurvey(survey);
+  }
+
   saveSurvey(survey: Survey): Observable<Survey> {
     return this.dataSource.saveSurvey(survey);
   }
 
-  addSurvey(survey: Survey): Observable<Survey> {
-    return this.dataSource.addSurvey(survey);
-  }
 }
