@@ -22,13 +22,14 @@ import {
 })
 export class NewSurveyComponent implements OnInit {
   surveyForm!: FormGroup;
-  private submitted = false;
+  submitted = false;
+  surveySent = false;
 
   constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.surveyForm = new FormGroup({
-      title: new FormControl(''),
+      title: new FormControl('', Validators.required),
       type: new FormControl(''),
       dateStart: new FormControl(new Date().toISOString().split('T')[0]),
       dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
@@ -89,11 +90,12 @@ export class NewSurveyComponent implements OnInit {
   //   this.surveyForm = JSON.parse(sessionStorage.getItem(this.surveyID)!);
   // }
 
-  onSubmit(form: any): void {
+  onSubmit(form: FormGroup): void {
     this.submitted = true;
     if (form.valid) {
       this.repository.addSurvey(form.value).subscribe(survey => {
         this.submitted = false;
+        this.surveySent = true;
       })
     }
   }

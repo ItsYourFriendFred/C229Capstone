@@ -23,7 +23,7 @@ export class SurveyDetailsComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
   survey!: Survey;
-  private submitted = false;
+  submitted = false;
 
   constructor(
     private repository: SurveyRepository,
