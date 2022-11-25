@@ -22,6 +22,7 @@ import {
 })
 export class NewSurveyComponent implements OnInit {
   surveyForm!: FormGroup;
+  private submitted = false;
 
   constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
@@ -88,7 +89,12 @@ export class NewSurveyComponent implements OnInit {
   //   this.surveyForm = JSON.parse(sessionStorage.getItem(this.surveyID)!);
   // }
 
-  onSubmit(form: any) {
-    console.log(form.value);
+  onSubmit(form: any): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.addSurvey(form.value).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
 }

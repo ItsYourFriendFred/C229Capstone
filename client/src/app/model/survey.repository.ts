@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
 import { StaticDataSource } from './static.datasource';
 import { RestDataSource } from './rest.datasource';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SurveyRepository {
@@ -46,4 +47,13 @@ export class SurveyRepository {
   getAvailableSurvey(): Survey[] {
     return this.availableSurveys;
   }
+
+  addSurvey(survey: Survey): Observable<Survey> {
+    return this.dataSource.addSurvey(survey);
+  }
+
+  saveSurvey(survey: Survey): Observable<Survey> {
+    return this.dataSource.saveSurvey(survey);
+  }
+
 }

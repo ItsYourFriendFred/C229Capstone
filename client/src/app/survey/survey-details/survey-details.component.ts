@@ -23,6 +23,7 @@ export class SurveyDetailsComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
   survey!: Survey;
+  private submitted = false;
 
   constructor(
     private repository: SurveyRepository,
@@ -152,9 +153,13 @@ export class SurveyDetailsComponent implements OnInit {
     this.survey = JSON.parse(sessionStorage.getItem(this.surveyID)!);
   }
 
-  onSubmit(form: any) {
-    console.log(form.value);
+  onSubmit(form: any): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.saveSurvey(form.value).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
-
   
 }
