@@ -61,18 +61,17 @@
             <div formArrayName="options">
               <div class="row">
                 <div
-                  [formGroupName]="j"
                   *ngFor="let option of getOptions(question); let j = index"
                   class="col-md-6 mb-2"
                 >
                   <input
-                    formControlName="option"
+                    [formControlName]="j"
                     name="option"
                     id="option"
                     class="form-control"
                     type="text"
                   />
-                  <a class="a-del-option" (click)="removeOption(i,j)">X</a>
+                  <a class="a-del-option" (click)="removeOption(i, j)">X</a>
                 </div>
               </div>
             </div>

@@ -43,9 +43,7 @@ export class NewSurveyComponent implements OnInit {
   }
 
   initOption() {
-    return new FormGroup({
-      option: new FormControl('')
-    });
+    return new FormControl('');
   }
 
   addQuestion() {
@@ -81,6 +79,14 @@ export class NewSurveyComponent implements OnInit {
     );
     control.removeAt(j);
   }
+
+  // temporarySurveySave() {
+  //   sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
+  // }
+
+  // retriveTemporarySurveySave() {
+  //   this.surveyForm = JSON.parse(sessionStorage.getItem(this.surveyID)!);
+  // }
 
   onSubmit(form: any) {
     console.log(form.value);

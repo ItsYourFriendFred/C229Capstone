@@ -34,13 +34,13 @@ export class SurveyDetailsComponent implements OnInit {
     this.surveyID = this.route.snapshot.params['id'];
     this.route.params.subscribe((param) => {
       this.readFromParam(param['id']);
-      
+
       if (this.router.getCurrentNavigation()?.trigger === 'popstate') {
         if (Object.keys(param).length !== 0) {
-          this.initialisePage();
+          this.initialisePageWithData();
         }
       }
-      this.initialisePage();
+      this.initialisePageWithData();
     });
   }
 
@@ -49,19 +49,26 @@ export class SurveyDetailsComponent implements OnInit {
     this.survey = this.repository.getSurvey(this.surveyID!);
   }
 
-  initialisePage() {
+  initialisePageWithData() {
+    if (!this.survey) {
+      if (sessionStorage.getItem(this.surveyID)) {
+        this.retriveTemporarySurveySave();
+      } else {
+        this.initialisePageWithoutData();
+        return;
+      }
+    }
+
+    this.temporarySurveySave();
+
     this.surveyForm = new FormGroup({
-      title: new FormControl(this.survey.title ? this.survey.title! : ''),
-      type: new FormControl(this.survey.type ? this.survey.type! : ''),
+      title: new FormControl(this.survey.title),
+      type: new FormControl(this.survey.type),
       dateStart: new FormControl(
-        new Date(this.survey.dateStart ? this.survey.dateStart! : '')
-          .toISOString()
-          .split('T')[0]
+        new Date(this.survey.dateStart!).toISOString().split('T')[0]
       ),
       dateEnd: new FormControl(
-        new Date(this.survey.dateEnd ? this.survey.dateEnd! : '')
-          .toISOString()
-          .split('T')[0]
+        new Date(this.survey.dateEnd!).toISOString().split('T')[0]
       ),
       questionsBloc: new FormArray([]),
     });
@@ -80,6 +87,18 @@ export class SurveyDetailsComponent implements OnInit {
     }
   }
 
+  initialisePageWithoutData() {
+    console.log(this.surveyID);
+    this.surveyForm = new FormGroup({
+      title: new FormControl(''),
+      type: new FormControl(''),
+      dateStart: new FormControl(new Date().toISOString().split('T')[0]),
+      dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
+      questionsBloc: new FormArray([this.initQuestion()]),
+    });
+    this.addOption(0);
+  }
+
   initQuestion(question: string = '') {
     return new FormGroup({
       question: new FormControl(question),
@@ -88,9 +107,7 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   initOption(option: string = '') {
-    return new FormGroup({
-      option: new FormControl(option),
-    });
+    return new FormControl(option);
   }
 
   addQuestion(question: string = '') {
@@ -127,7 +144,17 @@ export class SurveyDetailsComponent implements OnInit {
     control.removeAt(j);
   }
 
+  temporarySurveySave() {
+    sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
+  }
+
+  retriveTemporarySurveySave() {
+    this.survey = JSON.parse(sessionStorage.getItem(this.surveyID)!);
+  }
+
   onSubmit(form: any) {
     console.log(form.value);
   }
+
+  
 }
