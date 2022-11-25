@@ -9,10 +9,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const SurveySchema = new Schema({
-    title: String,
-    author: String,
     dateStart: Date,
     dateEnd: Date,
+    title: String,
+    type: String,
+    author: String,
+    user: String,
+    questionsBloc: [{
+            question: String,
+            options: [String]
+        }],
+    answerBloc: [{
+            answer: [Number]
+        }],
     isActive: Boolean
 }, {
     collection: "surveys"

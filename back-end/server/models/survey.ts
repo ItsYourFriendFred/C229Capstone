@@ -9,10 +9,19 @@ const Schema = mongoose.Schema; // Alias for mongoose.Schema
 // Create a Schema that matches the data
 const SurveySchema = new Schema(
     {
-        title: String,
-        author: String,
         dateStart: Date,
         dateEnd: Date,
+        title: String,
+        type: String,
+        author: String,
+        user: String,
+        questionsBloc: [{
+            question: String,
+            options: [String]
+        }],
+        answerBloc: [{
+            answer: [Number]
+        }],
         isActive: Boolean
     },
     {
