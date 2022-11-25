@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="survey">
   <h1>Edit Survey</h1>
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <!-- General Survey Details -->
@@ -11,12 +11,12 @@
       <input
         class="form-control"
         type="date"
-        value="{{ survey.dateStart!.toISOString().split('T')[0] }}"
+        value="{{ survey.dateStart! }}"
         #dateStart='ngModel' [(ngModel)]='survey.dateStart' [ngModelOptions]='{standalone: true}' required/>
       <input
         class="form-control"
         type="date"
-        value="{{ survey.dateEnd!.toISOString().split('T')[0] }}"
+        value="{{ survey.dateEnd! }}"
         #dateEnd='ngModel' [(ngModel)]='survey.dateEnd' [ngModelOptions]='{standalone: true}' required/>
     </div>
 

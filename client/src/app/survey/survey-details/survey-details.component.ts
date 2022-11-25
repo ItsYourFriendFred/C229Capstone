@@ -14,7 +14,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SurveyDetailsComponent implements OnInit {
   private surveyID?: string;
-  private surveyToEdit?: Survey;
+  public surveyToEdit!: Survey;
   private submitted = false;
 
   constructor(
@@ -22,7 +22,9 @@ export class SurveyDetailsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   get survey(): Survey {
     this.route.params.subscribe((params) => {
