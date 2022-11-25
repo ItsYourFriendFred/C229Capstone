@@ -1,8 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { SurveyModule } from '../survey.module';
+import { Subscription, VirtualTimeScheduler } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { Event } from '@angular/router';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  Form,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-new-survey',
@@ -10,51 +21,74 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./new-survey.component.css'],
 })
 export class NewSurveyComponent implements OnInit {
-  private submitted = false;
+  surveyForm!: FormGroup;
 
-  constructor(private repository: SurveyRepository) {}
+  constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
-
-  private surveyToAdd?: Survey = {
-    title: '',
-    type: '',
-    dateEnd: new Date(),
-    dateStart: new Date(),
-    questionsBloc: [
-      {
-        question: '',
-        options: [''],
-      },
-    ],
-  };
-
-  get survey(): Survey {
-    return this.surveyToAdd!;
+  ngOnInit() {
+    this.surveyForm = new FormGroup({
+      title: new FormControl(''),
+      type: new FormControl(''),
+      dateStart: new FormControl(new Date().toISOString().split('T')[0]),
+      dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
+      questionsBloc: new FormArray([this.initQuestion()]),
+    });
   }
 
-  addQuestion(): void {
-    this.surveyToAdd!.questionsBloc!.push({ question: '', options: [''] });
+  initQuestion() {
+    return new FormGroup({
+      question: new FormControl(),
+      options: new FormArray([this.initOption()]),
+    });
   }
 
-  addOption(i: number): void {
-    this.surveyToAdd!.questionsBloc![i].options!.push('');
+  initOption() {
+    return new FormControl('');
   }
 
-  deleteQuestion(i: number): void {
-    this.surveyToAdd!.questionsBloc!.splice(i, 1);
-  }
-  
-  deleteOption(i: number, j: number): void {
-    this.surveyToAdd!.questionsBloc![i].options!.splice(j, 1);
+  addQuestion() {
+    const control = <FormArray>this.surveyForm.get('questionsBloc');
+    control.push(this.initQuestion());
   }
 
-  onSubmit(form: NgForm): void {
-    this.submitted = true;
-    if (form.valid) {
-      this.repository.addSurvey(this.survey).subscribe(survey => {
-        this.submitted = false;
-      })
-    }
+  addOption(j: number) {
+    console.log(j);
+    const control = <FormArray>(
+      this.surveyForm.get(['questionsBloc', j, 'options'])
+    );
+    control.push(this.initOption());
+  }
+
+  getQuestions(form: any) {
+    return form.controls.questionsBloc.controls;
+  }
+
+  getOptions(form: any) {
+    return form.controls.options.controls;
+  }
+
+  removeQuestion(i: number) {
+    const control = <FormArray>this.surveyForm.get('questionsBloc');
+    control.removeAt(i);
+  }
+
+  removeOption(i: number, j: number) {
+    console.log(j);
+    const control = <FormArray>(
+      this.surveyForm.get(['questionsBloc', i, 'options'])
+    );
+    control.removeAt(j);
+  }
+
+  // temporarySurveySave() {
+  //   sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
+  // }
+
+  // retriveTemporarySurveySave() {
+  //   this.surveyForm = JSON.parse(sessionStorage.getItem(this.surveyID)!);
+  // }
+
+  onSubmit(form: any) {
+    console.log(form.value);
   }
 }
