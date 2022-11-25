@@ -2,54 +2,57 @@ import { Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { SurveyModule } from '../survey.module';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { param } from 'jquery';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-survey-list',
-  templateUrl: './survey-list.component.html',
-  styleUrls: ['./survey-list.component.css'],
+  selector: 'app-survey-details',
+  templateUrl: './survey-details.component.html',
+  styleUrls: ['./survey-details.component.css'],
 })
-export class SurveyListComponent implements OnInit {
-  public surveysPerPage = 4;
-  public selectedPage = 1;
+export class SurveyDetailsComponent implements OnInit {
+  private surveyID?: string;
+  private surveyToEdit?: Survey;
+  private submitted = false;
 
-  constructor(private repository: SurveyRepository) {}
+  constructor(
+    private repository: SurveyRepository,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {}
 
-  // Getters
-  get surveys(): Survey[] {
-    const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
-
-    return this.repository
-      .getSurveys()
-      .slice(pageIndex, pageIndex + this.surveysPerPage);
-  }
-  
-  get today() : Date {
-    return new Date();
-  } 
-
-  get completedSurvey(): Survey[] {
-    return this.repository.getCompletedSurvey();
+  get survey(): Survey {
+    this.route.params.subscribe((params) => {
+      this.surveyID = params['id'];
+      this.surveyToEdit = this.repository.getSurvey(this.surveyID!);
+    });
+    return this.surveyToEdit!;
   }
 
-  get availableSurvey(): Survey[] {
-    return this.repository.getAvailableSurvey();
+  addQuestion(): void {
+    this.surveyToEdit!.questionsBloc!.push({ question: '', options: [''] });
   }
 
-  changePage(newPage: number): void {
-    this.selectedPage = newPage;
+  addOption(i: number): void {
+    this.surveyToEdit!.questionsBloc![i].options!.push('');
   }
 
-  changePageSize(newSize: number): void {
-    this.surveysPerPage = Number(newSize);
-    this.changePage(1);
+  deleteQuestion(i: number): void {
+    this.surveyToEdit!.questionsBloc!.splice(i, 1);
+  }
+  deleteOption(i: number, j: number): void {
+    this.surveyToEdit!.questionsBloc![i].options!.splice(j, 1);
   }
 
-  get pageCount(): number {
-    return Math.ceil(
-      this.repository.getSurveys().length /
-        this.surveysPerPage
-    );
+  onSubmit(form: NgForm): void {
+    this.submitted = true;
+    if (form.valid) {
+      this.repository.saveSurvey(this.survey).subscribe(survey => {
+        this.submitted = false;
+      })
+    }
   }
 }
