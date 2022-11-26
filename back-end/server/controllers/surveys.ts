@@ -72,6 +72,7 @@ export function ProcessEditPage(req: express.Request, res: express.Response, nex
     // Instantiate a new survey to edit
     let updatedSurvey = new Survey(
         {
+            "_id": id,
             "dateStart": new Date(req.body.dateStart),
             "dateEnd": new Date(req.body.dateEnd),
             "title": req.body.title,
@@ -83,7 +84,7 @@ export function ProcessEditPage(req: express.Request, res: express.Response, nex
     );
 
     // Update the survey in the database
-    Survey.findByIdAndUpdate(req.params.id, updatedSurvey, function(err: CallbackError) {
+    Survey.updateOne({_id: id}, updatedSurvey, function(err: CallbackError) {
         if (err) {
             console.error(err);
             res.end(err);
