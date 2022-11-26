@@ -52,8 +52,14 @@ export class SurveyRepository {
     return this.dataSource.addSurvey(survey);
   }
 
-  saveSurvey(survey: Survey): Observable<Survey> {
-    return this.dataSource.saveSurvey(survey);
+  saveSurvey(survey: Survey, surveyID: string): Observable<Survey> {
+    return this.dataSource.updateSurvey(survey, surveyID);
+  }
+
+  deleteSurvey(deletedSurveyID: string): void {
+    this.dataSource.deleteSurvey(deletedSurveyID).subscribe((survey) => {
+      this.surveys.splice(this.surveys.findIndex((survey) => survey._id === deletedSurveyID), 1);
+    })
   }
 
 }

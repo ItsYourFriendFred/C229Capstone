@@ -156,8 +156,11 @@ export class SurveyDetailsComponent implements OnInit {
   onSubmit(form: any): void {
     this.submitted = true;
     if (form.valid) {
-      this.repository.saveSurvey(form.value).subscribe(survey => {
+      this.repository.saveSurvey(form.value, this.surveyID).subscribe(survey => {
         this.submitted = false;
+        this.router.navigateByUrl('/survey-list').then(() => {
+          window.location.reload();
+        });
       })
     }
   }

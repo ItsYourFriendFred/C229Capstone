@@ -52,4 +52,17 @@ export class SurveyListComponent implements OnInit {
         this.surveysPerPage
     );
   }
+
+  // Uncomment when you actually do need to delete a survey (to keep our test data for experimenting)
+  deleteSurvey(id: string): void {
+    console.log(id);
+    /*
+    if (confirm('Are you sure?') && (id !== undefined)) {
+      this.repository.deleteSurvey(id);
+    }
+    else{
+      window.location.reload();
+    }
+    */
+  }
 }

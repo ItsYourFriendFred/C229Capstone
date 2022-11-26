@@ -25,7 +25,7 @@
     <div class="list-duplicate"></div>
   </div>
   <div *ngFor="let survey of surveys" class="list-box mt-2 d-flex flex-row">
-    <div class="list-del">X</div>
+    <div class="list-del" (click)="deleteSurvey(survey._id!)">X</div>
     <div class="list-name">
       <h5>{{ survey.title | slice: 0:100 }}</h5>
     </div>
