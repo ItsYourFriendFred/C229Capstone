@@ -98,7 +98,7 @@ export function ProcessDeletePage(req: express.Request, res: express.Response, n
     let id = req.params.id;
 
     // Pass the ID to the database and delete the survey
-    Survey.remove({_id: id}, function(err: CallbackError){
+    Survey.deleteOne({_id: id}, function(err: CallbackError){
         if (err) {
             console.error(err);
             res.end(err);

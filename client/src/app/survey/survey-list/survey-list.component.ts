@@ -52,4 +52,13 @@ export class SurveyListComponent implements OnInit {
         this.surveysPerPage
     );
   }
+
+  deleteSurvey(id: string): void {
+    if (confirm('Are you sure?') && (id !== undefined)) {
+      this.repository.deleteSurvey(id);
+    }
+    else{
+      window.location.reload();
+    }
+  }
 }
