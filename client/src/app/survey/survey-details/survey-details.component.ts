@@ -158,7 +158,9 @@ export class SurveyDetailsComponent implements OnInit {
     if (form.valid) {
       this.repository.saveSurvey(form.value, this.surveyID).subscribe(survey => {
         this.submitted = false;
-        this.router.navigateByUrl('/survey-list');
+        this.router.navigateByUrl('/survey-list').then(() => {
+          window.location.reload();
+        });
       })
     }
   }
