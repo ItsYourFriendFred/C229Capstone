@@ -39,9 +39,9 @@ export class RestDataSource {
         return this.http.post<Survey>(this.baseUrl + 'api/surveys/add', survey);
     }
 
-    saveSurvey(survey: Survey): Observable<Survey> {
+    updateSurvey(survey: Survey, surveyID: string): Observable<Survey> {
         console.log(JSON.stringify(survey));
-        return this.http.post<Survey>(this.baseUrl + 'api/surveys/edit/:id', survey);
+        return this.http.post<Survey>(`${this.baseUrl}api/surveys/edit/${surveyID}`, survey);
     }
 
 }
