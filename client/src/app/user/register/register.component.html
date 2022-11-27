@@ -2,42 +2,59 @@
   <div class="backdrop">
     <h1>Register</h1>
 
-    <form action="">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+
       <div class="row">
         <div class="col-md-6">
           <label class="form-label" for="">First Name:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="firstName" id="firstName" name="firstName" class="form-control" type="text" required
+            minlength="4" />
         </div>
+
         <div class="col-md-6">
           <label class="form-label" for="">Last Name:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="lastName" id="lastName" name="lastName" class="form-control" type="text" required
+            minlength="4" />
         </div>
+
         <div class="col-md-6">
           <label class="form-label" for="">Username:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="username" id="username" name="username" class="form-control" type="text" required
+            minlength="4" />
         </div>
+
         <div class="col-md-6">
           <label class="form-label" for="">Email Address:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="email" id="email" name="email" class="form-control" type="text" required
+            minlength="4" />
         </div>
+
         <div class="col-md-6">
           <label class="form-label" for="">Password:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="password" id="password" name="password" class="form-control" type="text" required
+            minlength="4" />
         </div>
+
         <div class="col-md-6">
           <label class="form-label" for="">Re-enter Password:</label>
-          <input class="form-control" type="text" />
+          <input formControlName="passwordConfirm" id="passwordConfirm" name="passwordConfirm" class="form-control"
+            type="text" required minlength="4" />
         </div>
       </div>
+
       <p class="terms-txt">
-        <input type="checkbox" name="" id="" /> I agree to the Term of Service
+        <input type="checkbox" name="" id=""required/> I agree to the Term of Service
         and Privacy Policy
       </p>
 
       <div class="container-center">
         <button type="submit" class="btn btn-primary">Register</button>
-        <a href="/home"><div type="submit" class="btn btn-danger">Cancel</div></a>
-        <p class="login-txt">Already have an account? <a href="/login">Login</a></p>
+        <a href="/home">
+          <div class="btn btn-danger">Cancel</div>
+        </a>
+        <p class="login-txt">
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </div>
     </form>
   </div>

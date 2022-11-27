@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AuthComponent } from './auth/auth.component';
 import { RouterModule } from '@angular/router';
@@ -18,7 +18,7 @@ const routing = RouterModule.forChild([
 ]);
 
 @NgModule({
-  imports: [CommonModule, FormsModule, routing],
+  imports: [CommonModule, FormsModule, routing, ReactiveFormsModule],
   declarations: [RegisterComponent, AuthComponent, UserComponent],
   exports: [RegisterComponent],
   providers: [AuthGuard]
