@@ -1,1 +1,22 @@
-<p>auth works!</p>
+<div class="container">
+    <div class="backdrop">
+        <h1>Login</h1>
+        <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf='errorMessage != null'>
+            {{ errorMessage }}
+        </div>
+        <form autocomplete='off' #form='ngForm' (ngSubmit)='authenticate(form)'>
+            <label class="form-label" for="username">Username:</label>
+            <input class="form-control" type="text" [(ngModel)]='user.username' name='username'
+                placeholder='Enter Username' id='username' required autofocus autocomplete='off' />
+            <label class="form-label" for="password">Password:</label>
+            <input class="form-control" type="text" [(ngModel)]='user.password' name='password'
+                placeholder='Enter Password' id='password' required autocomplete='off'>
+            <p class="forgot-txt"><a routerLink="">Forgot password?</a></p>
+            <div class="container-center">
+                <button type="submit" class="btn btn-primary">Log in</button><br />
+                <small>Don't have an account? </small><br />
+                <a routerLink="/register"><button class="btn btn-warning">Register</button></a>
+            </div>
+        </form>
+    </div>
+</div>

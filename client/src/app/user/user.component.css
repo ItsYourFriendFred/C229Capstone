@@ -16,27 +16,30 @@ h1 {
   }
   
   .backdrop {
-    padding: 0 25% 5%;
+    padding: 0 15% 5%;
     background-color: #bec8cc;
     border-radius: 20px;
   }
   
-  .forgot-txt {
-    margin: 1% 0 3%;
-    text-align: right;
+  .form-label {
+    margin: 4% 0 1%;
+    color: #264653;
+  }
+  
+  .terms-txt {
+    margin: 4% 0;
   }
   
   .container-center {
     text-align: center;
-    color: #264653;
   }
   
-  .btn-primary {
-    margin: 0 0 4%;
-    padding: 2% 10%;
+  .btn {
+      padding: 2% 10%;
+      margin: 0 2% 2%;
   }
   
-  .form-label {
-      margin: 4% 0 1%;
-      color: #264653;
+  .login-txt {
+      font-size: small;
+      font-weight: 600;
   }
