@@ -48,7 +48,7 @@ export class RestDataSource {
         this.user = null;
         localStorage.clear();
 
-        return this.http.get<any>(this.baseUrl + 'logout', this.httpOptions);
+        return this.http.get<any>(this.baseUrl + 'api/logout', this.httpOptions);
     }
 
     loggedIn(): boolean {
