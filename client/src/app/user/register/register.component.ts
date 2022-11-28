@@ -36,9 +36,11 @@ export class RegisterComponent implements OnInit {
     let passwordConfirm: string =
       this.registrationForm.controls['passwordConfirm'].value;
     this.newUser = new User();
+    this.newUser.firstName = firstName;
+    this.newUser.lastName = lastName;
     this.newUser.username = username;
     this.newUser.password = password;
-    this.newUser.DisplayName = firstName + lastName;
+    this.newUser.DisplayName = firstName + ' ' + lastName;
     this.newUser.EmailAddress = email;
 
   }
