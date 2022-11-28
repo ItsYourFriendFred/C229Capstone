@@ -72,6 +72,7 @@ export class RestDataSource {
     }
 
     deleteSurvey(surveyID: string): Observable<Survey> {
+        this.loadToken();
         return this.http.get<Survey>(`${this.baseUrl}api/surveys/delete/${surveyID}`, this.httpOptions);
     }
 

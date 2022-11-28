@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
+import { CounterDirective } from './counter.directive';
 
 const routing = RouterModule.forChild([
   { path: 'register', component: RegisterComponent },
@@ -20,8 +21,8 @@ const routing = RouterModule.forChild([
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing, ReactiveFormsModule],
-  declarations: [RegisterComponent, AuthComponent, UserComponent],
-  exports: [],
+  declarations: [RegisterComponent, AuthComponent, UserComponent, CounterDirective],
+  exports: [CounterDirective],
   providers: [AuthGuard, RegisterComponent]
 })
 export class UserModule {}

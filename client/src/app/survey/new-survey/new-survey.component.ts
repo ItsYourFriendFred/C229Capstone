@@ -24,6 +24,7 @@ export class NewSurveyComponent implements OnInit {
   surveyForm!: FormGroup;
   submitted = false;
   surveySent = false;
+  user = JSON.parse(localStorage.getItem('user')!);
 
   constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
 
@@ -91,9 +92,13 @@ export class NewSurveyComponent implements OnInit {
   // }
 
   onSubmit(form: FormGroup): void {
+    let finishedForm = form.value;
+    finishedForm.author = this.user.DisplayName;
+    finishedForm.user = this.user.username;
+
     this.submitted = true;
     if (form.valid) {
-      this.repository.addSurvey(form.value).subscribe(survey => {
+      this.repository.addSurvey(finishedForm).subscribe(survey => {
         this.submitted = false;
         this.surveySent = true;
       })

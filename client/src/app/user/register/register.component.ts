@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/model/user.model';
 import { UserRepository } from 'src/app/model/user.repository';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   formSent = false;
 
-  constructor(private repository: UserRepository) { }
+  constructor(private repository: UserRepository, private router: Router) { }
 
   ngOnInit(): void {
     this.registrationForm = new FormGroup({
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
       this.repository.registerUser(this.newUser).subscribe(form => {
         this.submitted = false;
         this.formSent = true;
+        this.router.navigateByUrl('login');
       })
     }
   }
