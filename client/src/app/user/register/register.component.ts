@@ -43,8 +43,6 @@ export class RegisterComponent implements OnInit {
 
   }
 
-
-
   onSubmit(form: FormGroup): void {
     this.convertFormToUserModel(form);
     this.submitted = true;

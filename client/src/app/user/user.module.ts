@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 
 const routing = RouterModule.forChild([
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: AuthComponent },
   { path: 'main', component: UserComponent, canActivate: [AuthGuard],
   children: [
@@ -20,7 +21,7 @@ const routing = RouterModule.forChild([
 @NgModule({
   imports: [CommonModule, FormsModule, routing, ReactiveFormsModule],
   declarations: [RegisterComponent, AuthComponent, UserComponent],
-  exports: [RegisterComponent],
-  providers: [AuthGuard]
+  exports: [],
+  providers: [AuthGuard, RegisterComponent]
 })
 export class UserModule {}

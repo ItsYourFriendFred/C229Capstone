@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent, data: {title: ''}},
   {path: 'contact', component: ContactComponent, data: {title: ''}},
   {path: 'faq', component: FaqComponent, data: {title: ''}},
-  {path: 'register', component: RegisterComponent, data: {title: ''}},
+  {path: 'register', redirectTo: '/user/register', data: {title: ''}},
   {path: 'login', redirectTo: '/user/login', pathMatch: 'full', data: {title: ''}},
   
 
