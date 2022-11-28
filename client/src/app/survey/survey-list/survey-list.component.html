@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-9"><input class="form-control" type="text" /></div>
       <div class="col-3">
-        <button type="button" class="btn btn-primary btn-new" routerLink="/new-survey">New Survey</button>
+        <button *ngIf="!isLoggedIn()" type="button" class="btn btn-primary btn-new" routerLink="/login">New Survey</button>
       </div>
     </div>
   </form>
@@ -24,8 +24,8 @@
     <div class="list-edit"></div>
     <div class="list-duplicate"></div>
   </div>
-  <div *ngFor="let survey of surveys" class="list-box mt-2 d-flex flex-row">
-    <div class="list-del" (click)="deleteSurvey(survey._id!)">X</div>
+  <div *ngFor="let survey of availableSurvey" class="list-box mt-2 d-flex flex-row">
+    <div *ngIf="isLoggedIn()" class="list-del" (click)="deleteSurvey(survey._id!)">X</div>
     <div class="list-name">
       <h5>{{ survey.title | slice: 0:100 }}</h5>
     </div>
@@ -42,10 +42,10 @@
       </h5>
     </div>
     <div class="list-edit">
-      <button type="button" class="btn btn-primary btn-list" routerLink="/edit/{{survey._id}}">Edit</button>
+      <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary btn-list" routerLink="/edit/{{survey._id}}">Edit</button>
     </div>
     <div class="list-duplicate">
-      <button type="button" class="btn btn-warning btn-list" routerLink="/delete/{{survey._id}}">Duplicate</button>
+      <button *ngIf="isLoggedIn()" type="button" class="btn btn-warning btn-list" routerLink="/delete/{{survey._id}}">Duplicate</button>
     </div>
   </div>
   <!-- Pages Buttons -->

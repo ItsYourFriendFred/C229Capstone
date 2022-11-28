@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { PartialsModule } from './partials/components.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserRepository } from './model/user.repository';
 
 export function jwtTokenGetter(): string {
   return localStorage.getItem('id_token')!;
@@ -31,7 +32,7 @@ export function jwtTokenGetter(): string {
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [UserRepository],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
