@@ -8,7 +8,11 @@ h5 {
 
 .form-control {
   height: 60px;
-  border-radius: 15px;
+  border-radius: 20px;
+}
+
+.search-bar {
+  padding: 0 3%;
 }
 
 a:link { text-decoration: none; 
@@ -63,7 +67,7 @@ color:#264653;
 
 .list-name {
   display: inline;
-  width: 30%;
+  width: 40%;
   margin-right: 5%;
   display: flex;
   align-items: center;
@@ -79,24 +83,14 @@ color:#264653;
 
 .list-status {
   display: inline;
-  width: 10%;
+  width: 20%;
   margin-right: 5%;
   display: flex;
   align-items: center;
 }
 
-.list-edit {
-  display: inline;
-  width: 70px;
-  margin-right: 1%;
-  display: flex;
-  align-items: center;
-}
-.list-duplicate {
-  display: inline;
-  width: 150px;
-  display: flex;
-  align-items: center;
+.list-btn {
+  cursor: pointer;
 }
 
 .btn-list {

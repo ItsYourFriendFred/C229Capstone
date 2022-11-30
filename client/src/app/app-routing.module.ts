@@ -4,10 +4,10 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './user/register/register.component';
 import { SurveyDetailsComponent } from './survey/survey-details/survey-details.component';
 import { SurveyListComponent } from './survey/survey-list/survey-list.component';
 import { NewSurveyComponent } from './survey/new-survey/new-survey.component';
+import { FillingFormComponent } from './survey/filling-form/filling-form.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: ''}},
@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'survey-list', component: SurveyListComponent, data: {title: ''}},
   {path: 'survey-details', component: SurveyDetailsComponent, data: {title: ''}},
   {path: 'edit/:id', component: SurveyDetailsComponent, data: {title: ''}},
+  {path: 'fill/survey/:id', component: FillingFormComponent, data: {title: ''}},
   {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}

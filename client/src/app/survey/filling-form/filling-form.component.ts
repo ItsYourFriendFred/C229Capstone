@@ -2,20 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+
 @Component({
-  selector: 'app-survey-details',
-  templateUrl: './survey-details.component.html',
-  styleUrls: ['./survey-details.component.css'],
+  selector: 'app-filling-form',
+  templateUrl: './filling-form.component.html',
+  styleUrls: ['./filling-form.component.css'],
 })
-export class SurveyDetailsComponent implements OnInit {
+export class FillingFormComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
-  survey!: Survey;
+  public survey!: Survey;
   submitted = false;
 
   constructor(
@@ -45,7 +42,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   initialisePageWithData() {
     if (!this.survey) {
-      if (sessionStorage.getItem(this.surveyID)) {
+      if (sessionStorage.getItem('fillingSurvey')) {
         this.retriveTemporarySurveySave();
       } else {
         this.initialisePageWithoutData();
@@ -57,13 +54,6 @@ export class SurveyDetailsComponent implements OnInit {
 
     this.surveyForm = new FormGroup({
       title: new FormControl(this.survey.title),
-      type: new FormControl(this.survey.type),
-      dateStart: new FormControl(
-        new Date(this.survey.dateStart!).toISOString().split('T')[0]
-      ),
-      dateEnd: new FormControl(
-        new Date(this.survey.dateEnd!).toISOString().split('T')[0]
-      ),
       questionsBloc: new FormArray([]),
     });
 
@@ -116,7 +106,7 @@ export class SurveyDetailsComponent implements OnInit {
     );
     control.push(this.initOption(option));
   }
-
+  
   getQuestions(form: any) {
     return form.controls.questionsBloc.controls;
   }
@@ -125,28 +115,15 @@ export class SurveyDetailsComponent implements OnInit {
     return form.controls.options.controls;
   }
 
-  removeQuestion(i: number) {
-    const control = <FormArray>this.surveyForm.get('questionsBloc');
-    control.removeAt(i);
-  }
-
-  removeOption(i: number, j: number) {
-    console.log(j);
-    const control = <FormArray>(
-      this.surveyForm.get(['questionsBloc', i, 'options'])
-    );
-    control.removeAt(j);
-  }
-
   temporarySurveySave() {
-    sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
+    sessionStorage.setItem('fillingSurvey', JSON.stringify(this.survey));
   }
 
   retriveTemporarySurveySave() {
-    this.survey = JSON.parse(sessionStorage.getItem(this.surveyID)!);
+    this.survey = JSON.parse(sessionStorage.getItem('fillingSurvey')!);
   }
 
-  onSubmit(form: any): void {
+   onSubmit(form: any): void {
     this.submitted = true;
     if (form.valid) {
       this.repository.saveSurvey(form.value, this.surveyID).subscribe(survey => {
@@ -157,5 +134,4 @@ export class SurveyDetailsComponent implements OnInit {
       })
     }
   }
-  
 }
