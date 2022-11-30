@@ -72,6 +72,12 @@ export class RestDataSource {
         return this.http.post<Survey>(`${this.baseUrl}api/surveys/edit/${surveyID}`, survey, this.httpOptions);
     }
 
+    answerSurvey(survey: Survey, surveyID: string): Observable<Survey> {
+        this.loadToken();
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(`${this.baseUrl}api/surveys/answer/${surveyID}`, survey, this.httpOptions);
+    }
+
     deleteSurvey(surveyID: string): Observable<Survey> {
         this.loadToken();
         return this.http.get<Survey>(`${this.baseUrl}api/surveys/delete/${surveyID}`, this.httpOptions);

@@ -61,4 +61,8 @@ export class SurveyRepository {
     })
   }
 
+  answerSurvey(survey: Survey, surveyID: string): Observable<Survey> {
+    return this.dataSource.answerSurvey(survey, surveyID);
+  }
+
 }

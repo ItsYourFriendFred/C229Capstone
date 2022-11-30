@@ -109,3 +109,22 @@ export function ProcessDeletePage(req: express.Request, res: express.Response, n
         res.json({success: true, message: 'Successfully deleted survey!'});
     });
 }
+
+export function ProcessAnswerPage(req: express.Request, res: express.Response, next: express.NextFunction): void {
+    let id = req.params.id;
+
+    // Instantiate a new survey to edit
+    let answers = {
+            "answerBloc": req.body.answerBloc
+        };
+    console.log(JSON.stringify(answers))
+    // Update the survey in the database
+    Survey.updateOne({_id: id}, {$set: answers}, function(err: CallbackError) {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        console.log(answers);
+        res.json({success: true, message: 'Successfully answered survey!', answers: answers});
+    });
+}

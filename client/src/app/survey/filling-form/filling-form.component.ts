@@ -130,10 +130,10 @@ export class FillingFormComponent implements OnInit {
     this.submitted = true;
     if (form.valid) {
       this.repository
-        .saveSurvey(form.value, this.surveyID)
+        .answerSurvey(form.value, this.surveyID)
         .subscribe((survey) => {
           this.submitted = false;
-          this.router.navigateByUrl('/user/main').then(() => {
+          this.router.navigateByUrl('survey-list').then(() => {
             window.location.reload();
           });
         });
