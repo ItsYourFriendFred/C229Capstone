@@ -13,6 +13,7 @@ export class FillingFormComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
   survey!: Survey;
+  isSelected: number[] = [];
   submitted = false;
 
   constructor(
@@ -33,8 +34,6 @@ export class FillingFormComponent implements OnInit {
       }
       this.initialisePageWithData();
     });
-
-    console.log(JSON.stringify(this.survey));
   }
 
   readFromParam(param: string) {
@@ -61,6 +60,7 @@ export class FillingFormComponent implements OnInit {
 
     for (let i = 0; i < this.survey.questionsBloc!.length; i++) {
       this.addQuestion(this.survey.questionsBloc![i].question);
+      this.isSelected.push(-1);
       this.survey.questionsBloc![i].options?.forEach((option) => {
         this.addOption(i, option);
       });
@@ -74,7 +74,6 @@ export class FillingFormComponent implements OnInit {
   }
 
   initialisePageWithoutData() {
-    console.log(this.surveyID);
     this.surveyForm = new FormGroup({
       title: new FormControl(''),
       questionsBloc: new FormArray([this.initQuestion()]),
@@ -99,7 +98,6 @@ export class FillingFormComponent implements OnInit {
   }
 
   addOption(j: number, option: string = '') {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', j, 'options'])
     );
@@ -123,20 +121,42 @@ export class FillingFormComponent implements OnInit {
   }
 
   registerUserInput(questionNumber: number, optionNumber: number) {
-    // this.survey.answerBloc[i].answer[j] =+ 1
+    if (this.isSelected[questionNumber] === -1) {
+      this.survey.answerBloc![questionNumber].answer![optionNumber] += 1;
+      this.isSelected[questionNumber] = optionNumber;
+    } else {
+      let previousOption = this.isSelected[questionNumber];
+      this.survey.answerBloc![questionNumber].answer![previousOption] -= 1;
+      this.survey.answerBloc![questionNumber].answer![optionNumber] += 1;
+      this.isSelected[questionNumber] = optionNumber;
+    }
   }
 
-  onSubmit(form: any): void {
+  validateAnswered(): Boolean {
+    for (let i = 0; i < this.isSelected.length; i++) {
+      if (this.isSelected[i] === -1) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  onSubmit(): void {
     this.submitted = true;
-    if (form.valid) {
+    let isFormCompleted = this.validateAnswered();
+
+    if (isFormCompleted) {
       this.repository
-        .answerSurvey(form.value, this.surveyID)
+        .answerSurvey(this.survey, this.surveyID)
         .subscribe((survey) => {
           this.submitted = false;
           this.router.navigateByUrl('survey-list').then(() => {
             window.location.reload();
           });
         });
+    } else {
+      window.alert('Please answer to every question before submitting.');
     }
   }
 }
