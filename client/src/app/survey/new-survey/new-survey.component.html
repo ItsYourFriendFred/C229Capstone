@@ -1,13 +1,19 @@
 <div class="container">
   <h1>Add Survey</h1>
 
-  <div *ngIf='surveySent' class="m-2 text-center backdrop">
+  <div *ngIf="surveySent" class="m-2 text-center backdrop">
     <h2>Survey Added!</h2>
     <p>Thanks for creating a survey!</p>
-    <button type="button" class="btn btn-primary" routerLink='/survey-list'>Return to Survey List</button>
+    <button type="button" class="btn btn-primary" routerLink="/survey-list">
+      Return to Survey List
+    </button>
   </div>
-    
-  <form *ngIf='!surveySent' [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
+
+  <form
+    *ngIf="!surveySent"
+    [formGroup]="surveyForm"
+    (ngSubmit)="onSubmit(surveyForm)"
+  >
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>
@@ -84,16 +90,24 @@
                     type="text"
                     required
                   />
-                  <a class="a-del-option" (click)="removeOption(i,j)">X</a>
+                  <a class="a-del-option" (click)="removeOption(i, j)">X</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-warning mb-2" (click)="addOption(i)">
+            <button
+              type="button"
+              class="btn btn-warning mb-2"
+              (click)="addOption(i)"
+            >
               Add Option
             </button>
-            <button type="button" class="btn btn-danger mb-2" (click)="removeQuestion(i)">
+            <button
+              type="button"
+              class="btn btn-danger mb-2"
+              (click)="removeQuestion(i)"
+            >
               Delete Question
             </button>
           </div>

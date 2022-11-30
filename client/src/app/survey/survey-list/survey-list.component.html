@@ -4,10 +4,18 @@
   <form action="">
     <div class="row">
       <div *ngIf="isLoggedIn()" class="col-9">
-        <input class="form-control search-bar" type="text" placeholder="Search" />
+        <input
+          class="form-control search-bar"
+          type="text"
+          placeholder="Search"
+        />
       </div>
       <div *ngIf="!isLoggedIn()" class="col-12">
-        <input class="form-control search-bar" type="text" placeholder="Search" />
+        <input
+          class="form-control search-bar"
+          type="text"
+          placeholder="Search"
+        />
       </div>
       <div *ngIf="isLoggedIn()" class="col-3">
         <button
@@ -34,24 +42,36 @@
   </div>
 
   <div *ngFor="let survey of availableSurvey">
+    <!-- IF SURVEY IS ACTIVE -->
     <div
+      *ngIf="survey.dateEnd! > today && survey.dateStart! < today"
       routerLink="/fill/survey/{{ survey._id }}"
-      class="list-box mt-2 d-flex flex-row list-btn"
+      class="list-box mt-2 d-flex flex-row survey-active"
     >
       <div class="list-name">
-        <h5>{{ survey.title | slice: 0:100 }}</h5>
+        <h5>{{ survey.title | slice : 0 : 100 }}</h5>
       </div>
       <div class="list-type">
         <h5>{{ survey.type }}</h5>
       </div>
       <div class="list-status">
-        <h5>
-          {{
-            survey.dateEnd! > today && survey.dateStart! < today
-              ? "Active"
-              : "Inactive"
-          }}
-        </h5>
+        <h5>Active</h5>
+      </div>
+    </div>
+
+    <!-- IF SURVEY IS INACTIVE -->
+    <div
+      *ngIf="survey.dateEnd! <= today || survey.dateStart! >= today"
+      class="list-box mt-2 d-flex flex-row survey-inactive"
+    >
+      <div class="list-name">
+        <h5>{{ survey.title | slice : 0 : 100 }}</h5>
+      </div>
+      <div class="list-type">
+        <h5>{{ survey.type }}</h5>
+      </div>
+      <div class="list-status">
+        <h5>Inactive</h5>
       </div>
     </div>
   </div>

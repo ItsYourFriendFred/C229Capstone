@@ -1,7 +1,7 @@
 <div class="container">
-  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
     <h1>{{ survey.title }}</h1>
-    
+
     <!-- Questions -->
     <div formArrayName="questionsBloc">
       <div
@@ -22,14 +22,15 @@
               class="col-md-6 mb-2"
             >
               <input
-                name="{{i}}"
-                id="{{j}}"
+                name="{{ i }}"
+                id="{{ j }}"
                 type="radio"
                 value="{{ survey.questionsBloc![i].options![j] }}"
-                (click)="registerUserInput(i, j)"
+                (change)="registerUserInput(i, j)"
               />
-            <label for="{{j}}" >{{ survey.questionsBloc![i].options![j] }}</label>
-
+              <label for="{{ j }}">{{
+                survey.questionsBloc![i].options![j]
+              }}</label>
             </div>
           </div>
         </div>

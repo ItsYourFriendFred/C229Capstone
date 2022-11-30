@@ -55,7 +55,6 @@ export class NewSurveyComponent implements OnInit {
   }
 
   addOption(j: number) {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', j, 'options'])
     );
@@ -76,7 +75,6 @@ export class NewSurveyComponent implements OnInit {
   }
 
   removeOption(i: number, j: number) {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', i, 'options'])
     );
@@ -88,17 +86,16 @@ export class NewSurveyComponent implements OnInit {
     let numberOfQuestions: number = finishedForm.questionsBloc
       ? finishedForm.questionsBloc!.length
       : 0;
-    finishedForm.answerBloc = []
-
+    finishedForm.answerBloc = [];
 
     for (let i = 0; i < numberOfQuestions; i++) {
-      finishedForm.answerBloc.push({answer: []});
+      finishedForm.answerBloc.push({ answer: [] });
       let numberOfOptions: number = finishedForm.questionsBloc![i].options
         ? finishedForm.questionsBloc![i].options!.length
         : 0;
 
-      for (let j = 0; j < numberOfOptions; j++) {        
-          finishedForm.answerBloc![i].answer!.push(0)
+      for (let j = 0; j < numberOfOptions; j++) {
+        finishedForm.answerBloc![i].answer!.push(0);
       }
     }
 
@@ -110,9 +107,8 @@ export class NewSurveyComponent implements OnInit {
     finishedForm.author = this.user.DisplayName;
     finishedForm.user = this.user.username;
     finishedForm = this.assignAnswerBloc(finishedForm);
-
     this.submitted = true;
-    console.log(form.valid);
+
     if (form.valid) {
       this.repository.addSurvey(finishedForm).subscribe((survey) => {
         this.submitted = false;
@@ -121,6 +117,8 @@ export class NewSurveyComponent implements OnInit {
           window.location.reload();
         });
       });
+    } else {
+      window.alert('Please make sure to fill each fields.');
     }
   }
 }

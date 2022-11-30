@@ -106,7 +106,6 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   addOption(j: number, option: string = '') {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', j, 'options'])
     );
@@ -127,7 +126,6 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   removeOption(i: number, j: number) {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', i, 'options'])
     );
@@ -169,21 +167,20 @@ export class SurveyDetailsComponent implements OnInit {
 
   onSubmit(form: any): void {
     this.submitted = true;
-
     let finishedForm = form.value;
     finishedForm = this.assignAnswerBloc(finishedForm);
-    
-    console.log(JSON.stringify(finishedForm))
 
     if (form.valid) {
       this.repository
         .saveSurvey(finishedForm, this.surveyID)
         .subscribe((survey) => {
           this.submitted = false;
-          // this.router.navigateByUrl('/user/main').then(() => {
-          //   window.location.reload();
-          // });
+          this.router.navigateByUrl('/user/main').then(() => {
+            window.location.reload();
+          });
         });
+    } else {
+      window.alert('Please make sure to fill each fields.');
     }
   }
 }
