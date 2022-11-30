@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Survey } from './survey.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
 import { User } from './user.model';
 
 const Protocol = 'http';

@@ -79,10 +79,11 @@ export function ProcessEditPage(req: express.Request, res: express.Response, nex
             "type": req.body.type,
             "author": req.body.author,
             "user": req.body.user,
-            "questionsBloc": req.body.questionsBloc
+            "questionsBloc": req.body.questionsBloc,
+            "answerBloc": req.body.answerBloc
         }
     );
-
+    console.log(JSON.stringify(updatedSurvey))
     // Update the survey in the database
     Survey.updateOne({_id: id}, updatedSurvey, function(err: CallbackError) {
         if (err) {

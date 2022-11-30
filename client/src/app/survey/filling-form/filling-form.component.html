@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
-    <h1>{{survey.title}}</h1>
-
+    <h1>{{ survey.title }}</h1>
+    
     <!-- Questions -->
     <div formArrayName="questionsBloc">
       <div
@@ -10,31 +10,27 @@
         class="backdrop"
       >
         <h3>Question {{ i + 1 }}:</h3>
-        <input
-          formControlName="question"
-          id="question"
-          name="question"
-          class="form-control"
-          type="text"
-        />
+        <p>{{ survey.questionsBloc![i].question }}</p>
 
         <!-- Options -->
 
         <h3>Options:</h3>
-            <div formArrayName="options">
-              <div class="row">
-                <div
-                  *ngFor="let option of getOptions(question); let j = index"
-                  class="col-md-6 mb-2"
-                >
-                  <input
-                    [formControlName]="j"
-                    name="option"
-                    id="option"
-                    class="form-control"
-                    type="text"
-                  />
-                </div>
+        <div formArrayName="options">
+          <div class="row">
+            <div
+              *ngFor="let option of getOptions(question); let j = index"
+              class="col-md-6 mb-2"
+            >
+              <input
+                name="{{i}}"
+                id="{{j}}"
+                type="radio"
+                value="{{ survey.questionsBloc![i].options![j] }}"
+                (click)="registerUserInput(i, j)"
+              />
+            <label for="{{j}}" >{{ survey.questionsBloc![i].options![j] }}</label>
+
+            </div>
           </div>
         </div>
       </div>
