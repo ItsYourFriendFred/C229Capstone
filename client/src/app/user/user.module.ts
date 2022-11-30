@@ -12,17 +12,24 @@ import { CounterDirective } from './counter.directive';
 const routing = RouterModule.forChild([
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: AuthComponent },
-  { path: 'main', component: UserComponent, canActivate: [AuthGuard],
-  children: [
-    { path: '**', redirectTo: 'survey-list' },
-  ]},
-  { path: '**', redirectTo: 'auth'},
+  {
+    path: 'main',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    children: [{ path: '**', redirectTo: 'survey-list' }],
+  },
+  { path: '**', redirectTo: 'auth' },
 ]);
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing, ReactiveFormsModule],
-  declarations: [RegisterComponent, AuthComponent, UserComponent, CounterDirective],
+  declarations: [
+    RegisterComponent,
+    AuthComponent,
+    UserComponent,
+    CounterDirective,
+  ],
   exports: [CounterDirective],
-  providers: [AuthGuard, RegisterComponent]
+  providers: [AuthGuard, RegisterComponent],
 })
 export class UserModule {}
