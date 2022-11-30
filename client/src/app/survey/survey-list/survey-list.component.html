@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-9"><input class="form-control" type="text" /></div>
       <div class="col-3">
-        <button *ngIf="!isLoggedIn()" type="button" class="btn btn-primary btn-new" routerLink="/login">New Survey</button>
+        <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary btn-new" routerLink="/login">New Survey</button>
       </div>
     </div>
   </form>
