@@ -15,8 +15,10 @@ export class SurveyListComponent implements OnInit {
   public selectedPage = 1;
   user!: User | null;
 
-  constructor(private repository: SurveyRepository,
-    private authService: AuthService) {}
+  constructor(
+    private repository: SurveyRepository,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -28,17 +30,21 @@ export class SurveyListComponent implements OnInit {
       .getSurveys()
       .slice(pageIndex, pageIndex + this.surveysPerPage);
   }
-  
-  get today() : Date {
+
+  get today(): Date {
     return new Date();
-  } 
+  }
 
   get completedSurvey(): Survey[] {
     return this.repository.getCompletedSurvey();
   }
 
   get availableSurvey(): Survey[] {
-    return this.repository.getAvailableSurvey();
+    const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
+    
+    return this.repository
+      .getAvailableSurvey()
+      .slice(pageIndex, pageIndex + this.surveysPerPage);
   }
 
   changePage(newPage: number): void {
@@ -52,22 +58,19 @@ export class SurveyListComponent implements OnInit {
 
   get pageCount(): number {
     return Math.ceil(
-      this.repository.getSurveys().length /
-        this.surveysPerPage
+      this.repository.getAvailableSurvey().length / this.surveysPerPage
     );
   }
 
   // Uncomment when you actually do need to delete a survey (to keep our test data for experimenting)
   deleteSurvey(id: string): void {
     console.log(id);
-    
-    if (confirm('Are you sure?') && (id !== undefined)) {
+
+    if (confirm('Are you sure?') && id !== undefined) {
       this.repository.deleteSurvey(id);
-    }
-    else{
+    } else {
       window.location.reload();
     }
-    
   }
 
   isLoggedIn(): boolean {

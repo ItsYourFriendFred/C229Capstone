@@ -1,0 +1,64 @@
+<div class="container">
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm)">
+    <h1>{{survey.title}}</h1>
+
+    <!-- Questions -->
+    <div formArrayName="questionsBloc">
+      <div
+        [formGroupName]="i"
+        *ngFor="let question of getQuestions(surveyForm); let i = index"
+        class="backdrop"
+      >
+        <h3>Question {{ i + 1 }}:</h3>
+        <input
+          formControlName="question"
+          id="question"
+          name="question"
+          class="form-control"
+          type="text"
+        />
+
+        <!-- Options -->
+
+        <h3>Options:</h3>
+            <div formArrayName="options">
+              <div class="row">
+                <div
+                  *ngFor="let option of getOptions(question); let j = index"
+                  class="col-md-6 mb-2"
+                >
+                  <input
+                    [formControlName]="j"
+                    name="option"
+                    id="option"
+                    class="form-control"
+                    type="text"
+                  />
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form saving buttons -->
+    <div class="container-center">
+      <div class="row">
+        <div class="col-md-6">
+          <button
+            type="button"
+            class="btn btn-danger btn-end-form mb-2"
+            routerLink="/user/main"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary btn-end-form">
+            Submit Answers
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

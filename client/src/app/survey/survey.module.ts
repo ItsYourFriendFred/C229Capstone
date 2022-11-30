@@ -7,10 +7,11 @@ import { CounterDirective } from './counter.directive';
 import { ModelModule } from '../model/model.module';
 import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { RouterModule } from '@angular/router';
+import { FillingFormComponent } from './filling-form/filling-form.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ModelModule, RouterModule, ReactiveFormsModule],
-  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent],
+  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent, FillingFormComponent],
   exports: [SurveyListComponent, SurveyDetailsComponent, CounterDirective],
 })
 export class SurveyModule {}
