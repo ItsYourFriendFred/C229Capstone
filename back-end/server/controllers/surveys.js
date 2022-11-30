@@ -38,7 +38,8 @@ function ProcessAddPage(req, res, next) {
         "type": req.body.type,
         "author": req.body.author,
         "user": req.body.user,
-        "questionsBloc": req.body.questionsBloc
+        "questionsBloc": req.body.questionsBloc,
+        "answerBloc": req.body.answerBloc
     });
     newSurvey.isActive = true;
     survey_1.default.create(newSurvey, function (err) {

@@ -51,8 +51,8 @@ export function ProcessAddPage(req: express.Request, res: express.Response, next
             "type": req.body.type,
             "author": req.body.author,
             "user": req.body.user,
-            "questionsBloc": req.body.questionsBloc
-            // isActive set below
+            "questionsBloc": req.body.questionsBloc,
+            "answerBloc": req.body.answerBloc
         }
     );
     newSurvey.isActive = true;
