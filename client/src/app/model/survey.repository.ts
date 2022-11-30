@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
-import { StaticDataSource } from './static.datasource';
 import { RestDataSource } from './rest.datasource';
 import { Observable } from 'rxjs';
 

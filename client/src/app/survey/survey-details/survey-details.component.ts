@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-survey-details',
   templateUrl: './survey-details.component.html',
@@ -146,16 +142,48 @@ export class SurveyDetailsComponent implements OnInit {
     this.survey = JSON.parse(sessionStorage.getItem(this.surveyID)!);
   }
 
+  assignAnswerBloc(finishedForm: Survey): Survey {
+    let numberOfQuestions: number = finishedForm.questionsBloc
+      ? finishedForm.questionsBloc!.length
+      : 0;
+
+    // Initialise empty answer bloc
+    finishedForm.answerBloc = [];
+
+    for (let i = 0; i < numberOfQuestions; i++) {
+      // For each question, add an answer object
+      finishedForm.answerBloc.push({ answer: [] });
+
+      let numberOfOptions: number = finishedForm.questionsBloc![i].options
+        ? finishedForm.questionsBloc![i].options!.length
+        : 0;
+
+      for (let j = 0; j < numberOfOptions; j++) {
+        // For each option, add the counter set to 0
+        finishedForm.answerBloc![i].answer!.push(0);
+      }
+    }
+
+    return finishedForm;
+  }
+
   onSubmit(form: any): void {
     this.submitted = true;
+
+    let finishedForm = form.value;
+    finishedForm = this.assignAnswerBloc(finishedForm);
+    
+    console.log(JSON.stringify(finishedForm))
+
     if (form.valid) {
-      this.repository.saveSurvey(form.value, this.surveyID).subscribe(survey => {
-        this.submitted = false;
-        this.router.navigateByUrl('/user/main').then(() => {
-          window.location.reload();
+      this.repository
+        .saveSurvey(finishedForm, this.surveyID)
+        .subscribe((survey) => {
+          this.submitted = false;
+          // this.router.navigateByUrl('/user/main').then(() => {
+          //   window.location.reload();
+          // });
         });
-      })
     }
   }
-  
 }

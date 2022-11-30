@@ -12,7 +12,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 export class FillingFormComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
-  public survey!: Survey;
+  survey!: Survey;
   submitted = false;
 
   constructor(
@@ -33,6 +33,8 @@ export class FillingFormComponent implements OnInit {
       }
       this.initialisePageWithData();
     });
+
+    console.log(JSON.stringify(this.survey));
   }
 
   readFromParam(param: string) {
@@ -75,9 +77,6 @@ export class FillingFormComponent implements OnInit {
     console.log(this.surveyID);
     this.surveyForm = new FormGroup({
       title: new FormControl(''),
-      type: new FormControl(''),
-      dateStart: new FormControl(new Date().toISOString().split('T')[0]),
-      dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
       questionsBloc: new FormArray([this.initQuestion()]),
     });
     this.addOption(0);
@@ -106,7 +105,7 @@ export class FillingFormComponent implements OnInit {
     );
     control.push(this.initOption(option));
   }
-  
+
   getQuestions(form: any) {
     return form.controls.questionsBloc.controls;
   }
@@ -123,15 +122,21 @@ export class FillingFormComponent implements OnInit {
     this.survey = JSON.parse(sessionStorage.getItem('fillingSurvey')!);
   }
 
-   onSubmit(form: any): void {
+  registerUserInput(questionNumber: number, optionNumber: number) {
+    // this.survey.answerBloc[i].answer[j] =+ 1
+  }
+
+  onSubmit(form: any): void {
     this.submitted = true;
     if (form.valid) {
-      this.repository.saveSurvey(form.value, this.surveyID).subscribe(survey => {
-        this.submitted = false;
-        this.router.navigateByUrl('/user/main').then(() => {
-          window.location.reload();
+      this.repository
+        .saveSurvey(form.value, this.surveyID)
+        .subscribe((survey) => {
+          this.submitted = false;
+          this.router.navigateByUrl('/user/main').then(() => {
+            window.location.reload();
+          });
         });
-      })
     }
   }
 }
