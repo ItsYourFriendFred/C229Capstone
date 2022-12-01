@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/model/auth.service';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { User } from 'src/app/model/user.model';
-import { SurveyModule } from '../survey.module';
 
 @Component({
   selector: 'app-survey-list',

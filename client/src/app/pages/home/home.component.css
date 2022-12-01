@@ -1,23 +1,27 @@
 .wrapper {
-  position: relative;
-  margin-top: -5%;
+  margin-top: -6%;
   width: 100%;
   overflow: hidden;
 }
 
-.container {
-  padding-top: 5%;
+.section1 {
+  height: 350px;
+}
+
+h1 {
+  padding-top: 6%;
 }
 
 h3 {
   color: #264653;
   margin-bottom: 3%;
+  font-weight: 700;
 }
 
 .main-img {
   display: inline;
-  width: 70%;
-  margin: -40% -10%;
+  height: 685px;
+  margin: -550px -90px;
   float: right;
 }
 
@@ -25,6 +29,18 @@ h3 {
   .main-img {
     display: none;
   }
+}
+
+.question-text {
+  height: 45px;
+  font-weight: 500;
+}
+
+.options-text {
+  background-color: #e9c46a;
+  padding: 2% 5%;
+  margin: 1% 0;
+  border-radius: 10px;
 }
 
 .backdrop {
@@ -42,10 +58,11 @@ h3 {
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+  padding: 5% 8%;
+  cursor: pointer;
 }
 
 .survey-card {
-  height: 240px;
-  left: 188px;
-  top: 156px;
+  padding: 0 2%;
+  text-align: left;
 }
