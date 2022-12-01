@@ -9,6 +9,7 @@ import { SurveyListComponent } from './survey/survey-list/survey-list.component'
 import { NewSurveyComponent } from './survey/new-survey/new-survey.component';
 import { FillingFormComponent } from './survey/filling-form/filling-form.component';
 import { ResultViewComponent } from './survey/result-view/result-view.component';
+import { ThankyouPageComponent } from './survey/thankyou-page/thankyou-page.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: ''}},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'user', loadChildren: () => import('./user/user.module').then(module => module.UserModule)},
   {path: 'survey-list', component: SurveyListComponent, data: {title: ''}},
   {path: 'survey-details', component: SurveyDetailsComponent, data: {title: ''}},
+  {path: 'survey-completed', component: ThankyouPageComponent, data: {title: ''}},
   {path: 'edit/:id', component: SurveyDetailsComponent, data: {title: ''}},
   {path: 'fill/survey/:id', component: FillingFormComponent, data: {title: ''}},
   {path: 'result/:id', component: ResultViewComponent, data:{title: ""}},
