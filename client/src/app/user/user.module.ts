@@ -8,17 +8,16 @@ import { AuthGuard } from './auth/auth.guard';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { CounterDirective } from './counter.directive';
+import { SurveyDetailsComponent } from '../survey/survey-details/survey-details.component';
 
 const routing = RouterModule.forChild([
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: AuthComponent },
-  {
-    path: 'main',
-    component: UserComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: '**', redirectTo: 'survey-list' }],
+  { path: 'main', component: UserComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '**', redirectTo: '' }],
   },
-  { path: '**', redirectTo: 'auth' },
+  { path: '**', redirectTo: 'home' },
 ]);
 
 @NgModule({

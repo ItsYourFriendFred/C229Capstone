@@ -64,7 +64,11 @@ export class UserComponent {
   }
 
   get pageCount(): number {
-    return Math.ceil(this.repository.getSurveys().length / this.surveysPerPage);
+    return Math.ceil(this.repository.getSurveys()
+    .filter((survey) => {
+      return survey.user === this.currentUser.username;
+    })
+    .length / this.surveysPerPage);
   }
 
   // Uncomment when you actually do need to delete a survey (to keep our test data for experimenting)
@@ -73,6 +77,9 @@ export class UserComponent {
 
     if (confirm('Are you sure?') && id !== undefined) {
       this.repository.deleteSurvey(id);
+      this.router.navigateByUrl('/user/main').then(() => {
+        window.location.reload(); //TODO reload necessary or it goes to results page, see HTML, find more eloquent way?
+      });
     } else {
       window.location.reload();
     }

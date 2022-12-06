@@ -36,3 +36,7 @@ p {
 .btn-container {
     text-align: center;
 }
+
+button:disabled {
+  background-color: #4c575c;
+}
