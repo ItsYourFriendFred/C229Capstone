@@ -5,7 +5,7 @@ import { Survey } from './survey.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from './user.model';
 
-const Protocol = 'https';
+const Protocol = 'http';
 const Port = 3500;
 
 @Injectable()
@@ -24,11 +24,11 @@ export class RestDataSource {
 
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
         this.user = new User();
-        // Uncomment baseUrl depending on working locally or deployed
+        // Uncomment baseUrl depending on working locally or building deployment
         // Uncomment when working locally
-        // this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
+        this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
         // Uncomment when deployed
-        this.baseUrl = 'https://codek-backend.herokuapp.com/'
+        //this.baseUrl = 'https://codek-backend.herokuapp.com/'
     }
 
     getSurveys(): Observable<Survey[]> {
