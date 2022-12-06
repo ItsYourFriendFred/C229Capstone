@@ -24,7 +24,10 @@ export class RestDataSource {
 
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
         this.user = new User();
+        // Uncomment baseUrl depending on working locally or deployed
+        // Uncomment when working locally
         // this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
+        // Uncomment when deployed
         this.baseUrl = 'https://codek-backend.herokuapp.com/'
     }
 
