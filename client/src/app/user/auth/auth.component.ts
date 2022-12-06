@@ -26,7 +26,9 @@ export class AuthComponent implements OnInit {
       this.auth.authenticate(this.user).subscribe(data => {
         if (data.success) {
           this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl('user/main');  //TODO Change to an actual main user page after logging in
+          this.router.navigateByUrl('user/main').then(() => {
+            window.location.reload();
+          });;
         }
       });
     } else {
