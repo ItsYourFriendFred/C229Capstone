@@ -2,15 +2,13 @@
   <h1>Contact Us</h1>
   <div class="backdrop">
     <p class="description">
-      Do you have any questions? Please do not hesitate to contact us directly.
-      Our team will <br />
+      Do you have any questions? Please do not hesitate to contact us directly via email or using the form below.
+      Our team will
       come back to you within a matter of hours to help you.
     </p>
     <div class="row">
       <div class="col-md-5">
         <div class="icon-left">
-          <p><i class="fa-solid fa-phone-flip"></i> 000-000-0000</p>
-          <br />
           <p><i class="fa-solid fa-envelope"></i> contactcodek@email.com</p>
         </div>
       </div>
@@ -18,39 +16,72 @@
         <div class="icon"><i class="fa-solid fa-file-pen"></i></div>
       </div>
       <div class="col-md-6">
-        <form action="">
-          <div class="row">
+        <form [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)">
+          <div class="row form-group">
             <div class="col-6">
-              <input
-                class="form-control"
-                type="text"
-                placeholder="First Name"
-              />
+              <label for="firstName">
+                <input formControlName="firstName" class="form-control" type="text" name="firstName"
+                  placeholder="First Name" />
+              </label>
+              <div *ngIf="firstName!.invalid && (firstName!.dirty || firstName!.touched)" class="alert alert-danger">
+                <div *ngIf="firstName!.errors?.['required']">
+                  First Name is required.
+                </div>
+              </div>
             </div>
             <div class="col-6">
-              <input class="form-control" type="text" placeholder="Last Name" />
+              <label for="lastName">
+                <input formControlName="lastName" class="form-control" type="text" name="lastName"
+                  placeholder="Last Name" />
+              </label>
+              <div *ngIf="lastName!.invalid && (lastName!.dirty || lastName!.touched)" class="alert alert-danger">
+                <div *ngIf="lastName!.errors?.['required']">
+                  Last Name is required.
+                </div>
+              </div>
             </div>
           </div>
-
-          <input
-            class="form-control"
-            type="email"
-            placeholder="Email Address"
-          />
-          <input
-            class="form-control mt-2"
-            type="tel"
-            placeholder="Phone Number"
-          />
-          <textarea
-            class="form-control mt-2"
-            name=""
-            id=""
-            cols="30"
-            rows="5"
-          ></textarea>
+          <div class="row form-group">
+            <label for="email">
+              <input formControlName="email" class="form-control" type="email" name="email"
+                placeholder="Email Address" />
+            </label>
+            <div *ngIf="email!.invalid && (email!.touched)" class="alert alert-danger">
+              <div *ngIf="email!.errors?.['required']">
+                An email address is required.
+              </div>
+              <div *ngIf="email!.errors?.['email']">
+                Invalid email address
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label for="phoneNumber">
+              <input formControlName="phoneNumber" class="form-control mt-2" type="tel" name="phoneNumber" maxlength="15"
+                placeholder="Phone Number (Optional)" />
+            </label>
+            <div *ngIf="phoneNumber!.invalid && (phoneNumber!.touched)" class="alert alert-danger">
+              <div *ngIf="phoneNumber!.errors?.['pattern']">
+                Invalid phone number
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label for="comment">
+              <textarea formControlName="comment" class="form-control mt-2" name="comment" cols="30" rows="5"
+                placeholder="Enter your comments or questions here"></textarea>
+            </label>
+            <div *ngIf="comment!.invalid && (comment!.dirty || comment!.touched)" class="alert alert-danger">
+              <div *ngIf="comment!.errors?.['required']">
+                A comment or question is required.
+              </div>
+              <div *ngIf="comment!.errors?.['minlength']">
+                Comment or question must be at least 4 characters long.
+              </div>
+            </div>
+          </div>
           <div class="btn-container">
-            <button class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!formData.valid">Submit</button>
           </div>
         </form>
       </div>
