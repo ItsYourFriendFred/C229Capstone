@@ -51,8 +51,8 @@ export function ProcessAddPage(req: express.Request, res: express.Response, next
             "type": req.body.type,
             "author": req.body.author,
             "user": req.body.user,
-            "questionsBloc": req.body.questionsBloc
-            // isActive set below
+            "questionsBloc": req.body.questionsBloc,
+            "answerBloc": req.body.answerBloc
         }
     );
     newSurvey.isActive = true;
@@ -79,10 +79,11 @@ export function ProcessEditPage(req: express.Request, res: express.Response, nex
             "type": req.body.type,
             "author": req.body.author,
             "user": req.body.user,
-            "questionsBloc": req.body.questionsBloc
+            "questionsBloc": req.body.questionsBloc,
+            "answerBloc": req.body.answerBloc
         }
     );
-
+    console.log(JSON.stringify(updatedSurvey))
     // Update the survey in the database
     Survey.updateOne({_id: id}, updatedSurvey, function(err: CallbackError) {
         if (err) {
@@ -106,5 +107,24 @@ export function ProcessDeletePage(req: express.Request, res: express.Response, n
 
         // Delete was successful
         res.json({success: true, message: 'Successfully deleted survey!'});
+    });
+}
+
+export function ProcessAnswerPage(req: express.Request, res: express.Response, next: express.NextFunction): void {
+    let id = req.params.id;
+
+    // Instantiate a new survey to edit
+    let answers = {
+            "answerBloc": req.body.answerBloc
+        };
+    console.log(JSON.stringify(answers))
+    // Update the survey in the database
+    Survey.updateOne({_id: id}, {$set: answers}, function(err: CallbackError) {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        console.log(answers);
+        res.json({success: true, message: 'Successfully answered survey!', answers: answers});
     });
 }

@@ -3,15 +3,17 @@ import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+
 @Component({
-  selector: 'app-survey-details',
-  templateUrl: './survey-details.component.html',
-  styleUrls: ['./survey-details.component.css'],
+  selector: 'app-filling-form',
+  templateUrl: './filling-form.component.html',
+  styleUrls: ['./filling-form.component.css'],
 })
-export class SurveyDetailsComponent implements OnInit {
+export class FillingFormComponent implements OnInit {
   surveyID!: string;
   surveyForm!: FormGroup;
   survey!: Survey;
+  isSelected: number[] = [];
   submitted = false;
 
   constructor(
@@ -41,7 +43,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   initialisePageWithData() {
     if (!this.survey) {
-      if (sessionStorage.getItem(this.surveyID)) {
+      if (sessionStorage.getItem('fillingSurvey')) {
         this.retriveTemporarySurveySave();
       } else {
         this.initialisePageWithoutData();
@@ -53,18 +55,12 @@ export class SurveyDetailsComponent implements OnInit {
 
     this.surveyForm = new FormGroup({
       title: new FormControl(this.survey.title),
-      type: new FormControl(this.survey.type),
-      dateStart: new FormControl(
-        new Date(this.survey.dateStart!).toISOString().split('T')[0]
-      ),
-      dateEnd: new FormControl(
-        new Date(this.survey.dateEnd!).toISOString().split('T')[0]
-      ),
       questionsBloc: new FormArray([]),
     });
 
     for (let i = 0; i < this.survey.questionsBloc!.length; i++) {
       this.addQuestion(this.survey.questionsBloc![i].question);
+      this.isSelected.push(-1);
       this.survey.questionsBloc![i].options?.forEach((option) => {
         this.addOption(i, option);
       });
@@ -78,12 +74,8 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   initialisePageWithoutData() {
-    console.log(this.surveyID);
     this.surveyForm = new FormGroup({
       title: new FormControl(''),
-      type: new FormControl(''),
-      dateStart: new FormControl(new Date().toISOString().split('T')[0]),
-      dateEnd: new FormControl(new Date().toISOString().split('T')[0]),
       questionsBloc: new FormArray([this.initQuestion()]),
     });
     this.addOption(0);
@@ -120,67 +112,51 @@ export class SurveyDetailsComponent implements OnInit {
     return form.controls.options.controls;
   }
 
-  removeQuestion(i: number) {
-    const control = <FormArray>this.surveyForm.get('questionsBloc');
-    control.removeAt(i);
-  }
-
-  removeOption(i: number, j: number) {
-    const control = <FormArray>(
-      this.surveyForm.get(['questionsBloc', i, 'options'])
-    );
-    control.removeAt(j);
-  }
-
   temporarySurveySave() {
-    sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
+    sessionStorage.setItem('fillingSurvey', JSON.stringify(this.survey));
   }
 
   retriveTemporarySurveySave() {
-    this.survey = JSON.parse(sessionStorage.getItem(this.surveyID)!);
+    this.survey = JSON.parse(sessionStorage.getItem('fillingSurvey')!);
   }
 
-  assignAnswerBloc(finishedForm: Survey): Survey {
-    let numberOfQuestions: number = finishedForm.questionsBloc
-      ? finishedForm.questionsBloc!.length
-      : 0;
+  registerUserInput(questionNumber: number, optionNumber: number) {
+    if (this.isSelected[questionNumber] === -1) {
+      this.survey.answerBloc![questionNumber].answer![optionNumber] += 1;
+      this.isSelected[questionNumber] = optionNumber;
+    } else {
+      let previousOption = this.isSelected[questionNumber];
+      this.survey.answerBloc![questionNumber].answer![previousOption] -= 1;
+      this.survey.answerBloc![questionNumber].answer![optionNumber] += 1;
+      this.isSelected[questionNumber] = optionNumber;
+    }
+  }
 
-    // Initialise empty answer bloc
-    finishedForm.answerBloc = [];
-
-    for (let i = 0; i < numberOfQuestions; i++) {
-      // For each question, add an answer object
-      finishedForm.answerBloc.push({ answer: [] });
-
-      let numberOfOptions: number = finishedForm.questionsBloc![i].options
-        ? finishedForm.questionsBloc![i].options!.length
-        : 0;
-
-      for (let j = 0; j < numberOfOptions; j++) {
-        // For each option, add the counter set to 0
-        finishedForm.answerBloc![i].answer!.push(0);
+  validateAnswered(): Boolean {
+    for (let i = 0; i < this.isSelected.length; i++) {
+      if (this.isSelected[i] === -1) {
+        return false;
       }
     }
 
-    return finishedForm;
+    return true;
   }
 
-  onSubmit(form: any): void {
+  onSubmit(): void {
     this.submitted = true;
-    let finishedForm = form.value;
-    finishedForm = this.assignAnswerBloc(finishedForm);
+    let isFormCompleted = this.validateAnswered();
 
-    if (form.valid) {
+    if (isFormCompleted) {
       this.repository
-        .saveSurvey(finishedForm, this.surveyID)
+        .answerSurvey(this.survey, this.surveyID)
         .subscribe((survey) => {
           this.submitted = false;
-          this.router.navigateByUrl('/user/main').then(() => {
+          this.router.navigateByUrl('/survey-completed').then(() => {
             window.location.reload();
           });
         });
     } else {
-      window.alert('Please make sure to fill each fields.');
+      window.alert('Please answer to every question before submitting.');
     }
   }
 }

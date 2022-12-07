@@ -15,6 +15,7 @@ router.get('/surveys/add', surveys_1.DisplayAddPage);
 router.get('/surveys/edit/:id', surveys_1.DisplayEditPage);
 router.post('/surveys/add', passport_1.default.authenticate('jwt', { session: false }), surveys_1.ProcessAddPage);
 router.post('/surveys/edit/:id', passport_1.default.authenticate('jwt', { session: false }), surveys_1.ProcessEditPage);
+router.post('/surveys/answer/:id', passport_1.default.authenticate('jwt', { session: false }), surveys_1.ProcessAnswerPage);
 router.get('/surveys/delete/:id', passport_1.default.authenticate('jwt', { session: false }), surveys_1.ProcessDeletePage);
 exports.default = router;
 //# sourceMappingURL=surveys.js.map

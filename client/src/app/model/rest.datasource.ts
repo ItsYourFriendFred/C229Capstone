@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Survey } from './survey.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
 import { User } from './user.model';
 
 const Protocol = 'http';
@@ -25,7 +24,11 @@ export class RestDataSource {
 
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
         this.user = new User();
+        // Uncomment baseUrl depending on working locally or building deployment
+        // Uncomment when working locally
         this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
+        // Uncomment when deployed
+        //this.baseUrl = 'https://codek-backend.herokuapp.com/'
     }
 
     getSurveys(): Observable<Survey[]> {
@@ -71,6 +74,12 @@ export class RestDataSource {
         this.loadToken();
         console.log(JSON.stringify(survey));
         return this.http.post<Survey>(`${this.baseUrl}api/surveys/edit/${surveyID}`, survey, this.httpOptions);
+    }
+
+    answerSurvey(survey: Survey, surveyID: string): Observable<Survey> {
+        this.loadToken();
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(`${this.baseUrl}api/surveys/answer/${surveyID}`, survey, this.httpOptions);
     }
 
     deleteSurvey(surveyID: string): Observable<Survey> {

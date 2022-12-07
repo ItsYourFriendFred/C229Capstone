@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey.model';
-import { StaticDataSource } from './static.datasource';
 import { RestDataSource } from './rest.datasource';
 import { Observable } from 'rxjs';
 
@@ -60,6 +59,10 @@ export class SurveyRepository {
     this.dataSource.deleteSurvey(deletedSurveyID).subscribe((survey) => {
       this.surveys.splice(this.surveys.findIndex((survey) => survey._id === deletedSurveyID), 1);
     })
+  }
+
+  answerSurvey(survey: Survey, surveyID: string): Observable<Survey> {
+    return this.dataSource.answerSurvey(survey, surveyID);
   }
 
 }

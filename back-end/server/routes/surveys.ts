@@ -8,7 +8,7 @@ const router = express.Router();
 
 // import { AuthGuard, EditGuard } from '../Util';  // Replaced by protecting entire route with JWT
 
-import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage } from '../controllers/surveys'
+import { DisplayAddPage, DisplaySurveys, DisplayEditPage, ProcessAddPage, ProcessDeletePage, ProcessEditPage, ProcessAnswerPage } from '../controllers/surveys'
 
 // Surveys Page GET request 
 // Temp remove Authguard for api conversion ^v
@@ -31,6 +31,9 @@ router.post('/surveys/add', passport.authenticate('jwt', {session: false}), Proc
 // Process Edit Page POST request
 // router.post('/edit/:id', AuthGuard, ProcessEditPage);
 router.post('/surveys/edit/:id', passport.authenticate('jwt', {session: false}), ProcessEditPage);
+
+// Process Answer Page POST request
+router.post('/surveys/answer/:id', passport.authenticate('jwt', {session: false}), ProcessAnswerPage);
 
 // Process Delete Page GET request
 // router.get('/delete/:id', AuthGuard, ProcessDeletePage);

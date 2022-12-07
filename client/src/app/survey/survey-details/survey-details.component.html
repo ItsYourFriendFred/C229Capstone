@@ -4,6 +4,9 @@
     <!-- General Survey Details -->
     <div class="backdrop">
       <h3>Survey Name:</h3>
+      <p class="warning-txt">
+        NOTE: Editing survey will erase any previous answer received.
+      </p>
       <input
         formControlName="title"
         name="title"
@@ -77,10 +80,18 @@
             </div>
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-warning mb-2" (click)="addOption(i)">
+            <button
+              type="button"
+              class="btn btn-warning mb-2"
+              (click)="addOption(i)"
+            >
               Add Option
             </button>
-            <button type="button" class="btn btn-danger mb-2" (click)="removeQuestion(i)">
+            <button
+              type="button"
+              class="btn btn-danger mb-2"
+              (click)="removeQuestion(i)"
+            >
               Delete Question
             </button>
           </div>

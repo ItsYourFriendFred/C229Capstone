@@ -7,6 +7,10 @@ p {
   margin: 0 5% 7%;
 }
 
+.label-input {
+  width: 100%;
+}
+
 .backdrop {
   background-color: #bec8cc;
   border-radius: 20px;
@@ -35,4 +39,8 @@ p {
 
 .btn-container {
     text-align: center;
+}
+
+button:disabled {
+  background-color: #4c575c;
 }

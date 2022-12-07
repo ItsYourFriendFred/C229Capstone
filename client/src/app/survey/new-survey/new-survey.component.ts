@@ -1,19 +1,15 @@
 import { Component, Input, NgModule, OnInit } from '@angular/core';
-import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
-import { SurveyModule } from '../survey.module';
-import { Subscription, VirtualTimeScheduler } from 'rxjs';
-import { Title } from '@angular/platform-browser';
-import { Event } from '@angular/router';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
-  Form,
 } from '@angular/forms';
+import { __assign } from 'tslib';
+import { Survey } from 'src/app/model/survey.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-survey',
@@ -26,7 +22,11 @@ export class NewSurveyComponent implements OnInit {
   surveySent = false;
   user = JSON.parse(localStorage.getItem('user')!);
 
-  constructor(private repository: SurveyRepository, private fb: FormBuilder) {}
+  constructor(
+    private repository: SurveyRepository,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.surveyForm = new FormGroup({
@@ -55,7 +55,6 @@ export class NewSurveyComponent implements OnInit {
   }
 
   addOption(j: number) {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', j, 'options'])
     );
@@ -76,32 +75,50 @@ export class NewSurveyComponent implements OnInit {
   }
 
   removeOption(i: number, j: number) {
-    console.log(j);
     const control = <FormArray>(
       this.surveyForm.get(['questionsBloc', i, 'options'])
     );
     control.removeAt(j);
   }
 
-  // temporarySurveySave() {
-  //   sessionStorage.setItem(this.surveyID, JSON.stringify(this.survey));
-  // }
+  assignAnswerBloc(finishedForm: Survey): Survey {
+    let answerCounter = 0;
+    let numberOfQuestions: number = finishedForm.questionsBloc
+      ? finishedForm.questionsBloc!.length
+      : 0;
+    finishedForm.answerBloc = [];
 
-  // retriveTemporarySurveySave() {
-  //   this.surveyForm = JSON.parse(sessionStorage.getItem(this.surveyID)!);
-  // }
+    for (let i = 0; i < numberOfQuestions; i++) {
+      finishedForm.answerBloc.push({ answer: [] });
+      let numberOfOptions: number = finishedForm.questionsBloc![i].options
+        ? finishedForm.questionsBloc![i].options!.length
+        : 0;
+
+      for (let j = 0; j < numberOfOptions; j++) {
+        finishedForm.answerBloc![i].answer!.push(0);
+      }
+    }
+
+    return finishedForm;
+  }
 
   onSubmit(form: FormGroup): void {
     let finishedForm = form.value;
     finishedForm.author = this.user.DisplayName;
     finishedForm.user = this.user.username;
-
+    finishedForm = this.assignAnswerBloc(finishedForm);
     this.submitted = true;
+
     if (form.valid) {
-      this.repository.addSurvey(finishedForm).subscribe(survey => {
+      this.repository.addSurvey(finishedForm).subscribe((survey) => {
         this.submitted = false;
         this.surveySent = true;
-      })
+        this.router.navigateByUrl('/user/main').then(() => {
+          window.location.reload();
+        });
+      });
+    } else {
+      window.alert('Please make sure to fill each fields.');
     }
   }
 }

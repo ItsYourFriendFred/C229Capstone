@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>
+    <u><strong>Results</strong></u>
+  </h1>
+  <h1>
+    <small>{{ survey.title }}</small>
+  </h1>
+  <h2>Stats</h2>
+  <h4>Number of Participant: {{numberOfParticipants}}</h4>
+  <h4>Survey Status: {{ (survey.dateStart! < today && survey.dateEnd! > today) ? "Active" : "Closed"}}</h4>
+  <div *ngFor="let question of results; let i = index">
+    <h2>Question {{ i + 1 }} - {{ survey.questionsBloc![i].question }}</h2>
+
+    <div *ngFor="let option of results[i]; let j = index">
+      <div class="row">
+        <div class="col-6">
+          <h4>{{ survey.questionsBloc![i].options![j] }}</h4>
+        </div>
+        <div class="col-6">
+          <h4>% {{ option }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

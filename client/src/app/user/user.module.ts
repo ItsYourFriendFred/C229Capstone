@@ -8,21 +8,29 @@ import { AuthGuard } from './auth/auth.guard';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { CounterDirective } from './counter.directive';
+import { SurveyDetailsComponent } from '../survey/survey-details/survey-details.component';
+import { PasswordMatchDirective } from './password-match.directive';
 
 const routing = RouterModule.forChild([
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: AuthComponent },
   { path: 'main', component: UserComponent, canActivate: [AuthGuard],
-  children: [
-    { path: '**', redirectTo: 'survey-list' },
-  ]},
-  { path: '**', redirectTo: 'auth'},
+    children: [
+      { path: '**', redirectTo: '' }],
+  },
+  { path: '**', redirectTo: 'home' },
 ]);
 
 @NgModule({
   imports: [CommonModule, FormsModule, routing, ReactiveFormsModule],
-  declarations: [RegisterComponent, AuthComponent, UserComponent, CounterDirective],
+  declarations: [
+    RegisterComponent,
+    AuthComponent,
+    UserComponent,
+    CounterDirective,
+    PasswordMatchDirective,
+  ],
   exports: [CounterDirective],
-  providers: [AuthGuard, RegisterComponent]
+  providers: [AuthGuard, RegisterComponent],
 })
 export class UserModule {}

@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/model/auth.service';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
 import { User } from 'src/app/model/user.model';
-import { SurveyModule } from '../survey.module';
 
 @Component({
   selector: 'app-survey-list',
@@ -13,32 +12,65 @@ import { SurveyModule } from '../survey.module';
 export class SurveyListComponent implements OnInit {
   public surveysPerPage = 4;
   public selectedPage = 1;
+  public searchTitle = '';
+  public surveyResult: Survey[] = [];
   user!: User | null;
 
-  constructor(private repository: SurveyRepository,
-    private authService: AuthService) {}
+  constructor(
+    private repository: SurveyRepository,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
   // Getters
   get surveys(): Survey[] {
     const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
+    console.log(this.repository.getSurveys());
+    // .find({title: searchTitle})
 
-    return this.repository
-      .getSurveys()
-      .slice(pageIndex, pageIndex + this.surveysPerPage);
+    if (this.searchTitle === '' || !this.searchTitle) {
+      return this.repository
+        .getSurveys()
+        .slice(pageIndex, pageIndex + this.surveysPerPage);
+    } else {
+      return this.repository
+        .getSurveys()
+        .slice(pageIndex, pageIndex + this.surveysPerPage);
+    }
   }
-  
-  get today() : Date {
+
+  get today(): Date {
     return new Date();
-  } 
+  }
 
   get completedSurvey(): Survey[] {
     return this.repository.getCompletedSurvey();
   }
 
   get availableSurvey(): Survey[] {
-    return this.repository.getAvailableSurvey();
+    const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
+
+    if (this.searchTitle === '' || !this.searchTitle) {
+      this.surveyResult = this.repository.getAvailableSurvey();
+
+      return this.surveyResult.slice(
+        pageIndex,
+        pageIndex + this.surveysPerPage
+      );
+    } else {
+      this.surveyResult = [];
+      this.repository.getAvailableSurvey().find((survey) => {
+        if (survey.title!.toLowerCase().includes(this.searchTitle)) {
+          this.surveyResult.push(survey);
+        }
+      });
+
+      return this.surveyResult.slice(
+        pageIndex,
+        pageIndex + this.surveysPerPage
+      );
+    }
   }
 
   changePage(newPage: number): void {
@@ -50,24 +82,22 @@ export class SurveyListComponent implements OnInit {
     this.changePage(1);
   }
 
+  search(e: any) {
+    this.searchTitle = e.target.value.toLowerCase();
+    this.selectedPage = 1;
+  }
+
   get pageCount(): number {
-    return Math.ceil(
-      this.repository.getSurveys().length /
-        this.surveysPerPage
-    );
+    return Math.ceil(this.surveyResult.length / this.surveysPerPage);
   }
 
   // Uncomment when you actually do need to delete a survey (to keep our test data for experimenting)
   deleteSurvey(id: string): void {
-    console.log(id);
-    
-    if (confirm('Are you sure?') && (id !== undefined)) {
+    if (confirm('Are you sure?') && id !== undefined) {
       this.repository.deleteSurvey(id);
-    }
-    else{
+    } else {
       window.location.reload();
     }
-    
   }
 
   isLoggedIn(): boolean {
