@@ -98,7 +98,7 @@ a:active {
 }
 
 .survey-inactive {
-  cursor: pointer;
+  cursor:default;
   background-color: #bec8cc;
   opacity: 50%;
 }

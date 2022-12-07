@@ -151,7 +151,7 @@ export class FillingFormComponent implements OnInit {
         .answerSurvey(this.survey, this.surveyID)
         .subscribe((survey) => {
           this.submitted = false;
-          this.router.navigateByUrl('survey-list').then(() => {
+          this.router.navigateByUrl('/survey-completed').then(() => {
             window.location.reload();
           });
         });

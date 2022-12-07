@@ -9,10 +9,11 @@ import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { RouterModule } from '@angular/router';
 import { FillingFormComponent } from './filling-form/filling-form.component';
 import { ResultViewComponent } from './result-view/result-view.component';
+import { ThankyouPageComponent } from './thankyou-page/thankyou-page.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ModelModule, RouterModule, ReactiveFormsModule],
-  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent, FillingFormComponent, ResultViewComponent],
+  declarations: [SurveyListComponent, SurveyDetailsComponent, CounterDirective, NewSurveyComponent, FillingFormComponent, ResultViewComponent, ThankyouPageComponent],
   exports: [SurveyListComponent, SurveyDetailsComponent, CounterDirective],
 })
 export class SurveyModule {}
