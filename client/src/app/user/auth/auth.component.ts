@@ -29,6 +29,8 @@ export class AuthComponent implements OnInit {
           this.router.navigateByUrl('user/main').then(() => {
             window.location.reload();
           });;
+        } else {
+          this.errorMessage = 'Username or Password is incorrect!';
         }
       });
     } else {
