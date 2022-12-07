@@ -26,9 +26,9 @@ export class RestDataSource {
         this.user = new User();
         // Uncomment baseUrl depending on working locally or building deployment
         // Uncomment when working locally
-        this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
+        //this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
         // Uncomment when deployed
-        //this.baseUrl = 'https://codek-backend.herokuapp.com/'
+        this.baseUrl = 'https://codek-backend.herokuapp.com/'
     }
 
     getSurveys(): Observable<Survey[]> {
