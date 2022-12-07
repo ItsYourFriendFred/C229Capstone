@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'edit/survey/:id', component: SurveyDetailsComponent, data: {title: ''}, canActivate: [AuthGuard]},
   {path: 'fill/survey/:id', component: FillingFormComponent, data: {title: ''}},
   {path: 'result/:id', component: ResultViewComponent, data:{title: ""}},
-  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}},
+  {path: 'new-survey', component: NewSurveyComponent, data: {title: ''}, canActivate: [AuthGuard]},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
