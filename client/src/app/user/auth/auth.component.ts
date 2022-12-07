@@ -34,7 +34,7 @@ export class AuthComponent implements OnInit {
         }
       });
     } else {
-      this.errorMessage = 'Username or Password is incorrect!';
+      this.errorMessage = 'Username or Password is missing!';
     }
   }
 }
