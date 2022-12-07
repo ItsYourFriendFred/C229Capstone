@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from 'src/app/model/user.model';
 import { UserRepository } from 'src/app/model/user.repository';
 import { Router } from '@angular/router';
+import { createPasswordMatchValidator } from '../password-match.directive';
 
 @Component({
   selector: 'app-register',
@@ -22,10 +23,11 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      passwordConfirm: new FormControl(''),  //TODO Custom validator to match password
-    });
+      passwordConfirm: new FormControl('')
+    },
+    {validators: createPasswordMatchValidator()});
   }
 
   convertFormToUserModel(form: FormGroup): void {
@@ -57,6 +59,7 @@ export class RegisterComponent implements OnInit {
   get passwordConfirm() { return this.registrationForm.get('passwordConfirm');}
 
   get password() { return this.registrationForm.get('password');}
+
 
 
   onSubmit(form: FormGroup): void {

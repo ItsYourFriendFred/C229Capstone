@@ -8,7 +8,7 @@
         <div class="col-md-6">
           <label class="form-label" for="">First Name:</label>
           <input formControlName="firstName" id="firstName" name="firstName" class="form-control" type="text" required
-            minlength="4" />
+            />
             <div *ngIf="firstName!.invalid && (firstName!.dirty || firstName!.touched)" class="alert alert-danger">
               <div *ngIf="firstName!.errors?.['required']">
                 First Name is required.
@@ -19,7 +19,7 @@
         <div class="col-md-6">
           <label class="form-label" for="">Last Name:</label>
           <input formControlName="lastName" id="lastName" name="lastName" class="form-control" type="text" required
-            minlength="4" />
+            />
             <div *ngIf="lastName!.invalid && (lastName!.dirty || lastName!.touched)" class="alert alert-danger">
               <div *ngIf="lastName!.errors?.['required']">
                 Last Name is required.
@@ -35,23 +35,29 @@
               <div *ngIf="username!.errors?.['required']">
                 Username is required.
               </div>
+              <div *ngIf="username!.errors?.['minlength']">
+                Username must be at least 4 characters in length.
+              </div>
             </div>
         </div>
 
         <div class="col-md-6">
           <label class="form-label" for="">Email Address:</label>
           <input formControlName="email" id="email" name="email" class="form-control" type="text" required
-            minlength="4" />
-            <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="alert alert-danger">
+            />
+            <div *ngIf="email!.invalid && (email!.touched)" class="alert alert-danger">
               <div *ngIf="email!.errors?.['required']">
                 Email address is required.
+              </div>
+              <div *ngIf="email!.errors?.['email']">
+                Invalid email address
               </div>
             </div>
         </div>
 
         <div class="col-md-6">
           <label class="form-label" for="">Password:</label>
-          <input formControlName="password" id="password" name="password" class="form-control" type="text" required
+          <input formControlName="password" id="password" name="password" class="form-control" type="password" required
             minlength="4" />
             <div *ngIf="password!.invalid && (password!.touched)" class="alert alert-danger">
               <div *ngIf="password!.errors?.['required']">
@@ -65,9 +71,11 @@
 
         <div class="col-md-6">
           <label class="form-label" for="">Re-enter Password:</label>
-          <input formControlName="passwordConfirm" id="passwordConfirm" name="passwordConfirm" class="form-control"
-            type="text" required minlength="4" />
-            <!--TODO Custom validator to match password-->
+          <input matInput formControlName="passwordConfirm" id="passwordConfirm" name="passwordConfirm" class="form-control"
+            type="password"/>
+            <div *ngIf="registrationForm.errors?.['passwordMismatch'] && (passwordConfirm!.touched)" class="cross-validation-error alert alert-danger">
+              Passwords do not match.
+            </div>
         </div>
       </div>
 

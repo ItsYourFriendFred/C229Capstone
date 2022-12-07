@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { CounterDirective } from './counter.directive';
 import { SurveyDetailsComponent } from '../survey/survey-details/survey-details.component';
+import { PasswordMatchDirective } from './password-match.directive';
 
 const routing = RouterModule.forChild([
   { path: 'register', component: RegisterComponent },
@@ -27,6 +28,7 @@ const routing = RouterModule.forChild([
     AuthComponent,
     UserComponent,
     CounterDirective,
+    PasswordMatchDirective,
   ],
   exports: [CounterDirective],
   providers: [AuthGuard, RegisterComponent],
