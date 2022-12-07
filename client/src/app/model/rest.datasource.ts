@@ -26,7 +26,7 @@ export class RestDataSource {
         this.user = new User();
         // Uncomment baseUrl depending on working locally or building deployment
         // Uncomment when working locally
-        //this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
+        // this.baseUrl = `${Protocol}://${location.hostname}:${Port}/`;
         // Uncomment when deployed
         this.baseUrl = 'https://codek-backend.herokuapp.com/'
     }
@@ -77,7 +77,6 @@ export class RestDataSource {
     }
 
     answerSurvey(survey: Survey, surveyID: string): Observable<Survey> {
-        this.loadToken();
         console.log(JSON.stringify(survey));
         return this.http.post<Survey>(`${this.baseUrl}api/surveys/answer/${surveyID}`, survey, this.httpOptions);
     }
@@ -89,7 +88,7 @@ export class RestDataSource {
 
     registerUser(user: User): Observable<User> {
         console.log(JSON.stringify(user));
-        return this.http.post<User>(this.baseUrl + 'api/register', user);
+        return this.http.post<User>(this.baseUrl + 'api/register', user, this.httpOptions);
     }
 
 }

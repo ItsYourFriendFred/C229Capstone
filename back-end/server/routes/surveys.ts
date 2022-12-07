@@ -33,7 +33,7 @@ router.post('/surveys/add', passport.authenticate('jwt', {session: false}), Proc
 router.post('/surveys/edit/:id', passport.authenticate('jwt', {session: false}), ProcessEditPage);
 
 // Process Answer Page POST request
-router.post('/surveys/answer/:id', passport.authenticate('jwt', {session: false}), ProcessAnswerPage);
+router.post('/surveys/answer/:id', ProcessAnswerPage);
 
 // Process Delete Page GET request
 // router.get('/delete/:id', AuthGuard, ProcessDeletePage);
