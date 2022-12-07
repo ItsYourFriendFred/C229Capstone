@@ -29,6 +29,10 @@ img {
   z-index: -1;
 }
 
+a {
+  color: #2a9d8f;
+}
+
 .btn {
   color: #264653;
   font-weight: 600;

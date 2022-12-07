@@ -43,10 +43,6 @@ a:active {
   height: 100%;
 }
 
-.btn-new:hover {
-  background-color: #f4a261;
-}
-
 .list-header {
   padding: 1% 1% 0.25% 3%;
   background-color: #bec8cc;

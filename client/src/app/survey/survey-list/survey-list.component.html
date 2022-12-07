@@ -7,12 +7,14 @@
         <input
           class="form-control search-bar"
           type="text"
+          (keyup.enter)="search($event)"
           placeholder="Search"
         />
       </div>
       <div *ngIf="!isLoggedIn()" class="col-12">
         <input
           class="form-control search-bar"
+          (keyup.enter)="search($event)"
           type="text"
           placeholder="Search"
         />
