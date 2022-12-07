@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/user.model';
 import { UserRepository } from 'src/app/model/user.repository';
 import { Router } from '@angular/router';
@@ -19,12 +19,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      username: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
-      passwordConfirm: new FormControl(''),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      passwordConfirm: new FormControl(''),  //TODO Custom validator to match password
     });
   }
 
@@ -45,6 +45,19 @@ export class RegisterComponent implements OnInit {
     this.newUser.EmailAddress = email;
 
   }
+
+  get firstName() { return this.registrationForm.get('firstName');}
+
+  get lastName() { return this.registrationForm.get('lastName');}
+
+  get email() { return this.registrationForm.get('email');}
+
+  get username() { return this.registrationForm.get('username');}
+
+  get passwordConfirm() { return this.registrationForm.get('passwordConfirm');}
+
+  get password() { return this.registrationForm.get('password');}
+
 
   onSubmit(form: FormGroup): void {
     this.convertFormToUserModel(form);

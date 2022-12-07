@@ -43,3 +43,7 @@ p {
     font-size: small;
     font-weight: 600;
 }
+
+button:disabled {
+  background-color: #4c575c;
+}
