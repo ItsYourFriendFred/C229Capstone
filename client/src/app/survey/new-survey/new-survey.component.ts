@@ -38,6 +38,14 @@ export class NewSurveyComponent implements OnInit {
     });
   }
 
+  get today() {
+    return new Date().toISOString().split('T')[0];
+  }
+
+  get startDate() {
+    return this.surveyForm.controls['dateStart'].value;
+  }
+
   initQuestion() {
     return new FormGroup({
       question: new FormControl(),
