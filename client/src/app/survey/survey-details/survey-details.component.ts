@@ -89,6 +89,14 @@ export class SurveyDetailsComponent implements OnInit {
     this.addOption(0);
   }
 
+  get today() {
+    return new Date().toISOString().split('T')[0];
+  }
+
+  get startDate() {
+    return this.surveyForm.controls['dateStart'].value;
+  }
+
   initQuestion(question: string = '') {
     return new FormGroup({
       question: new FormControl(question),

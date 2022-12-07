@@ -28,6 +28,7 @@
         formControlName="dateStart"
         name="dateStart"
         id="dateStart"
+        min="{{ today }}"
         class="form-control"
         type="date"
       />
@@ -36,6 +37,7 @@
         name="dateEnd"
         id="dateEnd"
         class="form-control"
+        min="{{ startDate }}"
         type="date"
       />
     </div>

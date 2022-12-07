@@ -23,7 +23,7 @@ export class SurveyRepository {
         return new Date(survey.dateEnd!).getTime() < today.getTime();
       });
       this.availableSurveys = data.filter((survey) => {
-        return new Date(survey.dateEnd!).getTime() >= today.getTime();
+        return (new Date(survey.dateEnd!).getTime() >= today.getTime() && new Date(survey.dateStart!).getTime() <= today.getTime());
       });
     });
   }
