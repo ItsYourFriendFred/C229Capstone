@@ -945,7 +945,14 @@
       </div>
 
       <p class="terms-txt">
-        <input type="checkbox" name="" id="" required /> I agree to the
+        <input
+          type="checkbox"
+          formControlName="termsOfService"
+          name="termsOfService"
+          id="termsOfService"
+          required
+        />
+        I agree to the
         <span class="link-txt" (click)="viewTermService()"
           >Term of Service</span
         >
