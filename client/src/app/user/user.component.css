@@ -173,6 +173,7 @@ a:active {
 .btn-outline-primary {
   border-color: #2a9d8f;
   color: #fff;
+  padding: 10px;
 }
 
 .btn-outline-primary:hover {

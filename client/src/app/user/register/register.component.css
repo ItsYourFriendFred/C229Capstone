@@ -15,6 +15,34 @@ p {
   margin: 0 5% 7%;
 }
 
+.link-txt {
+  color: #2a9d8f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.close-popup {
+  position: sticky ;
+  background-color: #e76f51;
+  color: #fff;
+  padding: 15px;
+  top: 3%;
+  margin-left: -8%;
+  cursor: pointer;
+}
+
+.privacy-policy {
+  position: absolute;
+  background-color: #fff;
+  top: 100px;
+  z-index: 10;
+  width: 60%;
+  height: 80%;
+  overflow:scroll;
+  margin: auto;
+  padding: 0 5% 3%;
+}
+
 .backdrop {
   padding: 0 15% 5%;
   background-color: #bec8cc;

@@ -50,11 +50,6 @@ export class SurveyListComponent implements OnInit {
 
   get availableSurvey(): Survey[] {
     const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
-    console.log(
-      this.repository.getSurveys().find((survey) => {
-        return survey.title!.includes(this.searchTitle);
-      })
-    );
 
     if (this.searchTitle === '' || !this.searchTitle) {
       this.surveyResult = this.repository.getAvailableSurvey();
@@ -71,7 +66,10 @@ export class SurveyListComponent implements OnInit {
         }
       });
 
-      return this.surveyResult.slice(pageIndex, pageIndex + this.surveysPerPage);
+      return this.surveyResult.slice(
+        pageIndex,
+        pageIndex + this.surveysPerPage
+      );
     }
   }
 

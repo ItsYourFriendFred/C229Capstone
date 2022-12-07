@@ -3,7 +3,14 @@
 
   <form action="">
     <div class="row">
-      <div class="col-9"><input class="form-control" type="text" /></div>
+      <div class="col-9">
+        <input
+          class="form-control"
+          type="text"
+          (keyup.enter)="search($event)"
+          placeholder="Search"
+        />
+      </div>
       <div class="col-3">
         <button
           type="button"
@@ -30,7 +37,11 @@
     <div class="list-edit"></div>
     <div class="list-duplicate"></div>
   </div>
-  <div *ngFor="let survey of surveys" class="list-box mt-2 d-flex flex-row" routerLink="/result/{{ survey._id }}"> 
+  <div
+    *ngFor="let survey of surveys"
+    class="list-box mt-2 d-flex flex-row"
+    routerLink="/result/{{ survey._id }}"
+  >
     <!--TODO setting the entire above div with a RouterLink to results causes unintuitive behaviour when pressing the delete pseudo button/text -->
     <div class="list-del" (click)="deleteSurvey(survey._id!)">X</div>
     <div class="list-name">
@@ -61,7 +72,7 @@
       <button
         type="button"
         class="btn btn-warning btn-list"
-        routerLink="/delete/{{ survey._id }}"
+        (click)="duplicate(survey._id!)"
       >
         Duplicate
       </button>

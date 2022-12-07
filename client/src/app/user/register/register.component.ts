@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   newUser!: User;
   submitted = false;
   formSent = false;
+  privacyPolicy = false;
+  termService = false;
 
   constructor(private repository: UserRepository, private router: Router) { }
 
@@ -60,7 +62,21 @@ export class RegisterComponent implements OnInit {
 
   get password() { return this.registrationForm.get('password');}
 
+  hidePrivacyPolicy() {
+    this.privacyPolicy = false;
+  }
 
+  viewPrivacyPolicy() {
+    this.privacyPolicy = true;
+  }
+
+  hideTermService() {
+    this.termService = false;
+  }
+
+  viewTermService() {
+    this.termService = true;
+  }
 
   onSubmit(form: FormGroup): void {
     this.convertFormToUserModel(form);

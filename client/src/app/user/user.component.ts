@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Survey } from 'src/app/model/survey.model';
 import { SurveyRepository } from 'src/app/model/survey.repository';
-import { SurveyModule } from '../survey/survey.module';
 import { Router } from '@angular/router';
 import { AuthService } from '../model/auth.service';
 
@@ -15,6 +14,10 @@ export class UserComponent {
   public surveysPerPage = 4;
   public selectedPage = 1;
   public currentUser!: User;
+  public searchTitle = '';
+  public surveyResult: Survey[] = [];
+  submitted = false;
+  surveySent = false;
 
   constructor(
     private auth: AuthService,
@@ -34,12 +37,29 @@ export class UserComponent {
   get surveys(): Survey[] {
     const pageIndex = (this.selectedPage - 1) * this.surveysPerPage;
 
-    return this.repository
-      .getSurveys()
-      .filter((survey) => {
-        return survey.user === this.currentUser.username;
-      })
-      .slice(pageIndex, pageIndex + this.surveysPerPage);
+    this.surveyResult = this.repository.getSurveys().filter((survey) => {
+      return survey.user === this.currentUser.username;
+    });
+
+    if (this.searchTitle === '' || !this.searchTitle) {
+
+      return this.surveyResult.slice(
+        pageIndex,
+        pageIndex + this.surveysPerPage
+      );
+    } else {
+      this.surveyResult = [];
+      this.repository.getAvailableSurvey().find((survey) => {
+        if (survey.title!.toLowerCase().includes(this.searchTitle)) {
+          this.surveyResult.push(survey);
+        }
+      });
+
+      return this.surveyResult.slice(
+        pageIndex,
+        pageIndex + this.surveysPerPage
+      );
+    }
   }
 
   get today(): Date {
@@ -58,23 +78,39 @@ export class UserComponent {
     this.selectedPage = newPage;
   }
 
+  duplicate(surveyID: string) {
+    console.log(surveyID);
+    this.submitted = true;
+    let duplicatedForm = this.repository.getSurvey(surveyID);
+
+    this.repository.addSurvey(duplicatedForm).subscribe((survey) => {
+      this.submitted = false;
+      this.surveySent = true;
+      this.router.navigateByUrl('/user/main').then(() => {
+        window.location.reload();
+      });
+    });
+
+    this.submitted = false;
+    this.surveySent = false;
+  }
+
   changePageSize(newSize: number): void {
     this.surveysPerPage = Number(newSize);
     this.changePage(1);
   }
 
+  search(e: any) {
+    this.searchTitle = e.target.value.toLowerCase();
+    this.selectedPage = 1;
+  }
+
   get pageCount(): number {
-    return Math.ceil(this.repository.getSurveys()
-    .filter((survey) => {
-      return survey.user === this.currentUser.username;
-    })
-    .length / this.surveysPerPage);
+    return Math.ceil(this.surveyResult.length / this.surveysPerPage);
   }
 
   // Uncomment when you actually do need to delete a survey (to keep our test data for experimenting)
   deleteSurvey(id: string): void {
-    console.log(id);
-
     if (confirm('Are you sure?') && id !== undefined) {
       this.repository.deleteSurvey(id);
       this.router.navigateByUrl('/user/main').then(() => {
