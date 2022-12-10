@@ -1,11 +1,11 @@
 # CODEK Surveys
 
-Technologies:
-Angular
-Node.js / Express
-MongoDB Atlas
-Firebase (front-end hosting)
-Heroku (back-end hosting)
+Technologies:  
+•	Angular  
+•	Node.js / Express  
+•	MongoDB Atlas  
+•	Firebase (front-end hosting)  
+•	Heroku (back-end hosting)
 
 ## Development server
 
