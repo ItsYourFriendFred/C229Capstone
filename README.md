@@ -1,31 +1,24 @@
-# CODEK
+# CODEK Surveys
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+Technologies:
+Angular
+Node.js / Express
+MongoDB Atlas
+Firebase (front-end hosting)
+Heroku (back-end hosting)
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Navigate to the `client` directory and then run `ng serve --open` to run the project locally as a dev server in a new window. (Navigate to `http://localhost:4200/`)
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Image Sources:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<a href="https://www.freepik.com/free-vector/checklist-survey-concept_9649176.htm#query=survey&position=5&from_view=search&track=sph">Landing page image by pch.vector</a> on Freepik
 
-## Running end-to-end tests
+## Contact Form (Email API):
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-
-SOURCE IMAGES
-<a href="https://www.freepik.com/free-vector/checklist-survey-concept_9649176.htm#query=survey&position=5&from_view=search&track=sph">Image by pch.vector</a> on Freepik
+<a href="https://mailthis.to/">MailThis.to</a> - used to POST form data from the Contact Us page to our team email: team.codek.03@gmail.com
